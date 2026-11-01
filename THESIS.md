@@ -1,81 +1,77 @@
 # NEAR Investment Thesis
 
-> Every figure here is produced by `npm run build` from free, public, keyless
-> sources (NEARBlocks, DefiLlama, NEAR RPC, NEAR Intents 1Click). Do not edit
-> numbers by hand — re-run the pipeline. Snapshot generated 2026-11-01.
+Every number below comes from `npm run build`, which pulls free, keyless public
+APIs (NEARBlocks, DefiLlama, NEAR RPC, NEAR Intents 1Click). Do not edit numbers
+by hand. Re-run the pipeline. Snapshot: 2026-11-01.
 
-## The claim (one line)
-**NEAR is a security-dense, chain-abstraction settlement layer whose durable,
-multi-year usage underwrites long-term value — and at ~$4.38 it trades inside,
-not below, a defensible fair-value band, so the thesis is "own the compounding
-of real usage," not "it's cheap today."**
+## Claim
+Active accounts on NEAR fell 33% quarter over quarter. Fees paid rose 21% over
+the same period. Fewer accounts are paying more. We read this as usage moving
+from incentive farming to paid settlement, much of it routed through NEAR
+Intents. At $4.38, NEAR trades inside our fair-value band of $2.39 to $6.90. The
+long-term case is growth in paid usage, not a discount today.
 
-## Why NEAR, long term
-NEAR's bull case does not rest on price. It rests on three things that are hard
-to fake and that we can measure onchain:
+## The data
 
-1. **Security density.** 591.9M NEAR (**47.4% of circulating supply**) is staked
-   across **373 validators**. A high staking ratio makes the chain expensive to
-   attack and signals long holders, not mercenary float.
-2. **Chain abstraction as distribution.** NEAR Intents can route **210 assets
-   across 38 chains**. NEAR's wager is that users shouldn't care which chain they
-   are on; Intents turns NEAR into a cross-chain settlement hub, so NEAR usage
-   can grow even when the end asset isn't NEAR.
-3. **A real, multi-year transaction base.** Daily transactions and active
-   accounts have a years-long history (charted from 2021), not a single
-   incentive spike — the floor of genuine demand for NEAR blockspace.
+### Supporting
+- **Fees up.** Gas fees grew 20.6% QoQ to about 396K NEAR a year ($1.74M).
+- **Staking.** 591.9M NEAR, 47.4% of circulating supply, is staked across 373
+  validators. Attacking the chain is expensive, and a large share of holders are
+  locked in.
+- **Cross-chain reach.** NEAR Intents routes 210 assets across 38 chains. NEAR
+  usage can grow even when the asset being swapped is not NEAR.
+- **Supply.** Total supply is 1.310B and circulating is 1.250B. The gap is flat
+  and inflation is predictable.
+- **Capital.** About $200M in DeFi TVL has stayed through several market cycles.
 
-## Evidence FOR (all live)
-- **Staking ratio 47.4%** across 373 validators — deep economic security.
-- **Low, bounded inflation.** Total supply ~1.310B vs circulating ~1.250B; the
-  supply chart shows a flat, predictable gap, not aggressive dilution.
-- **Cross-chain reach**: 210 assets / 38 chains via NEAR Intents.
-- **Persistent DeFi capital**: ~$200M TVL that has survived multiple cycles.
-- **Sustained throughput**: ~738K txns/day (90d avg), a multi-year base.
+### Against
+- **Accounts down.** Active accounts average 71.9K a day over 90 days, down 33%
+  QoQ. This is the largest weakness in the case.
+- **Transactions down.** 738K a day over 90 days, down 6% QoQ.
+- **Thin fee capture.** Price-to-fees is about 3,309x. Fee yield is 0.03% of
+  market cap. The token captures little of the activity it secures today.
+- **Not cheap on TVL.** Mcap/TVL is 28.8x.
 
-## Evidence AGAINST (we show this on purpose)
-- **Active accounts are falling.** 90-day average ≈ **71.9K/day, down ~33% vs the
-  prior quarter.** This is the single biggest crack in the thesis and is front
-  and center on the dashboard.
-- **Transactions also softening**: 90d avg down ~6% QoQ — milder, but the same
-  direction.
-- **Thin fee capture.** Annualized gas fees ≈ **$1.73M**, a **price-to-fees ratio
-  of ~3,315×** and a fee yield of just **~0.03%** of market cap. Today the token
-  captures little of the activity it secures; the bull case needs fee capture (or
-  Intents-driven demand) to grow into the valuation.
-- **Mcap/TVL ~28.7×** is not screaming-cheap versus peer L1s.
+## Valuation
+NVT is excluded. NEARBlocks `txn_volume_usd` counts system, staking and refund
+transfers, which gives an NVT of 0.09. That is not a usable signal.
 
-## Valuation — a defensible range, not a prediction
-We deliberately **exclude NVT**: NEARBlocks `txn_volume_usd` over-counts system,
-staking and refund transfers (it implies an absurd NVT of ~0.09), so it is not a
-clean economic signal. Instead we triangulate three independent peer-multiple
-lenses on real metrics and take the **median band**:
+We use three peer-multiple lenses on live metrics and take the median of their
+low and high ends.
 
-| Lens | Basis | Fair range |
-| --- | --- | --- |
-| Fee multiple (P/F 2,000–6,000×) | $1.73M annual fees | $2.77–$8.32 |
-| TVL multiple (Mcap/TVL 15–40×) | $200M TVL | $2.40–$6.40 |
-| Active-user (mcap $40K–120K/active acct) | 71.9K active/day | $2.30–$6.90 |
-| **Blended (median)** | | **$2.40–$6.90** |
+| Lens | Basis | Base multiple | Fair range |
+| --- | --- | --- | --- |
+| Price to fees | $1.74M annual fees | 2,000x to 6,000x | $2.78 to $8.34 |
+| Mcap to TVL | $200M TVL | 15x to 40x | $2.39 to $6.39 |
+| Value per active user | 71.9K active a day | $40K to $120K | $2.30 to $6.90 |
+| **Median band** | | | **$2.39 to $6.90** |
 
-Current price **$4.38 sits inside this band** → NEAR looks **roughly fairly
-valued**, not a deep-value buy. The long-term return comes from the numerator
-(fees, TVL, active users) compounding, which is exactly what the dashboard
-tracks over time. The multiples live at the top of `model/thesis_model.py`; edit
-them and re-run to stress-test your own assumptions.
+Implied price (band midpoint) is about $4.65, roughly 6% above $4.38. Verdict:
+fair value.
+
+### Scenarios
+| Scenario | P/F | Mcap/TVL | $ per active user |
+| --- | --- | --- | --- |
+| Bear | 1,000x to 3,000x | 8x to 20x | $20K to $60K |
+| Base | 2,000x to 6,000x | 15x to 40x | $40K to $120K |
+| Bull | 4,000x to 10,000x | 30x to 70x | $80K to $200K |
+
+The dashboard has a Bear/Base/Bull toggle and sliders for every multiple. The
+band, implied price and verdict recompute in the browser as you change them.
 
 ## What would change our mind
-- **Bearish:** active accounts AND transactions decline for 2+ more quarters, or
-  Intents asset/chain coverage stalls while price rises (usage not backing price).
-- **Bullish:** fee yield climbs toward peer-L1 levels (P/F compressing under
-  ~1,000×), or Intents-routed volume and active accounts re-accelerate — either
-  pushes the fair-value band above the current price.
+1. **Fees roll over.** QoQ fee growth turns negative. The paid-usage claim fails.
+2. **Staking falls.** Staked ratio drops below 40%, or the validator set shrinks
+   materially.
+3. **Intents stalls.** Supported assets and chains stop growing for two quarters.
+4. **Capital leaves.** TVL falls more than 30% while price holds.
 
-## Reproduce this
-```sh
+## Reproduce
+```bash
 npm install
-npm run build   # fetch live data + recompute the model
-npm run site    # build the static dashboard (out/)
+npm run build   # fetch live data and run model/thesis_model.py
+npm run site    # static export to out/
 ```
-Nothing is hard-coded. If a metric can't be computed from these keyless sources
-it is omitted here rather than invented.
+Multiples live at the top of `model/thesis_model.py`. Change them and re-run.
+
+Not financial advice.

@@ -1,10 +1,10 @@
 {
   "generated_at": "2026-11-01",
   "inputs": {
-    "price_usd": 4.39,
-    "market_cap_usd": 5747533546,
+    "price_usd": 4.38,
+    "market_cap_usd": 5737517401,
     "circulating_supply_near": 1249836992,
-    "total_supply_near": 1310524613
+    "total_supply_near": 1310524612
   },
   "adoption": {
     "active_accounts_90d_avg": 71890,
@@ -15,8 +15,8 @@
   },
   "value_accrual": {
     "annual_gas_fees_near": 395626,
-    "annual_gas_fees_usd": 1736798,
-    "price_to_fees_ratio": 3309,
+    "annual_gas_fees_usd": 1732841,
+    "price_to_fees_ratio": 3311,
     "fee_yield_vs_mcap": 0.000302
   },
   "security": {
@@ -30,11 +30,11 @@
     "mcap_to_tvl": 28.8
   },
   "valuation": {
-    "current_price_usd": 4.39,
+    "current_price_usd": 4.38,
     "lenses_usd": {
       "fee_multiple": [
-        2.78,
-        8.34
+        2.77,
+        8.32
       ],
       "tvl_multiple": [
         2.39,
@@ -94,7 +94,7 @@
       }
     },
     "basis": {
-      "annual_fees_usd": 1736797.7438867805,
+      "annual_fees_usd": 1732841.4847890886,
       "tvl_usd": 199510903,
       "active_accounts": 71890.4,
       "circ_supply": 1249836992.159308
