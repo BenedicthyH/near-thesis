@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, LineChart, Line, BarChart, Bar,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -81,7 +82,19 @@ export default function Dashboard({ data }) {
   const chainBars = [...it.chains].slice(0, 16).map((c) => ({ chain: c.toUpperCase(), v: 1 }));
 
   const [lo, hi] = m.valuation.blended_fair_range_usd;
-  const scaleMax = Math.max(hi, price) * 1.15;
+  const [scn, setScn] = useState('base');
+  const V = m.valuation, B = V.basis, S = V.scenarios[scn];
+  const med = (a) => [...a].sort((x, y) => x - y)[1];
+  const r2 = (x) => Math.round(x * 100) / 100;
+  const L = {
+    fee: S.pf.map((k) => r2(B.annual_fees_usd * k / B.circ_supply)),
+    tvl: S.mt.map((k) => r2(B.tvl_usd * k / B.circ_supply)),
+    usr: S.per_user.map((k) => r2(B.active_accounts * k / B.circ_supply)),
+  };
+  const sLo = med([L.fee[0], L.tvl[0], L.usr[0]]), sHi = med([L.fee[1], L.tvl[1], L.usr[1]]);
+  const implied = r2((sLo + sHi) / 2), updown = implied / price - 1;
+  const verdict = price < sLo ? 'below band — undervalued' : price > sHi ? 'above band — overvalued' : 'inside band — fairly valued';
+  const scaleMax = Math.max(sHi, price) * 1.15;
   const leftPct = (x) => (x / scaleMax) * 100;
   const aaDown = m.adoption.active_accounts_growth_qoq < 0;
   const txDown = m.adoption.txns_growth_qoq < 0;
@@ -108,10 +121,16 @@ export default function Dashboard({ data }) {
 
       <div className="wrap">
         <div className="hero" id="overview">
-          <h1>The case for NEAR, in onchain data.</h1>
+          <h1>NEAR's settlement demand is decoupling from speculative growth.</h1>
           <p className="sub">An evidence-first investment thesis. Every figure is pulled live from free, public sources by one command — nothing is hand-typed, and anyone can re-run it.</p>
           <div className="thesis">
-            <b>Thesis.</b> NEAR is a security-dense, chain-abstraction settlement layer. Durable usage — a {pct(m.security.staked_ratio).replace('+','')} staking ratio, {it.asset_count} assets routable across {it.chains_supported} chains via NEAR Intents, and a multi-year transaction base — underwrites long-term value. But with thin fee capture and a recent dip in active accounts, NEAR looks <b>roughly fairly valued today</b> (blended fair range ${lo}–${hi} vs ${price}). The return case is usage compounding into the valuation, not a discount to it.
+            <b>Thesis.</b> Active accounts fell <b>{pct(m.adoption.active_accounts_growth_qoq)}</b> quarter-over-quarter — yet fees paid <b>{pct(m.adoption.fees_growth_qoq)}</b>, a <b>{pct(m.security.staked_ratio).replace('+','')}</b> staking ratio held across {st.num_validators} validators, and NEAR Intents now routes <b>{it.asset_count} assets across {it.chains_supported} chains</b>. The tourists are leaving; the fee-paying settlement demand is staying. NEAR's value is decoupling from speculative account growth and anchoring to durable, chain-abstracted usage. With fee capture still thin, NEAR trades <b>inside its fair-value band</b> (${lo}–${hi} vs ${price}) — the return case is that sticky demand compounding, not a discount today.
+          </div>
+          <div className="diverge">
+            <div><span className="l">Active accounts QoQ</span><span className="num down">{pct(m.adoption.active_accounts_growth_qoq)}</span></div>
+            <div><span className="l">Fees paid QoQ</span><span className={'num ' + (m.adoption.fees_growth_qoq >= 0 ? 'up' : 'down')}>{pct(m.adoption.fees_growth_qoq)}</span></div>
+            <div><span className="l">Staked supply</span><span className="num up">{pct(m.security.staked_ratio).replace('+','')}</span></div>
+            <div><span className="l">Intents reach</span><span className="num up">{it.asset_count} / {it.chains_supported} chains</span></div>
           </div>
         </div>
 
@@ -196,21 +215,31 @@ export default function Dashboard({ data }) {
         <div className="sec" id="valuation"><h2>Valuation</h2></div>
         <div className="grid">
           <div className="card full">
+            <div className="scnbar">
+              <span className="scnl">Scenario</span>
+              <div className="seg" role="tablist">
+                {['bear', 'base', 'bull'].map((k) => (
+                  <button key={k} className={scn === k ? 'on' : ''} onClick={() => setScn(k)}>{k[0].toUpperCase() + k.slice(1)}</button>
+                ))}
+              </div>
+              <span className="scnv num">Implied ${implied} · <span className={updown >= 0 ? 'up' : 'down'}>{pct(updown)}</span> vs ${price}</span>
+            </div>
             <h3>Fair value — three independent lenses</h3>
-            <div className="metnow num">Blended fair range ${lo}–${hi} · current ${price}</div>
+            <div className="metnow num">{scn[0].toUpperCase() + scn.slice(1)} fair range ${sLo}–${sHi} · current ${price} · {verdict}</div>
             <div className="valbar">
-              <div className="valrange" style={{ left: leftPct(lo) + '%', width: (leftPct(hi) - leftPct(lo)) + '%' }} />
+              <div className="valrange" style={{ left: leftPct(sLo) + '%', width: (leftPct(sHi) - leftPct(sLo)) + '%' }} />
               <div className="valnow" style={{ left: leftPct(price) + '%' }}><span>now ${price}</span></div>
             </div>
-            <div className="scale num"><span>$0</span><span>fair ${lo}–${hi}</span><span>${scaleMax.toFixed(0)}</span></div>
+            <div className="scale num"><span>$0</span><span>fair ${sLo}–${sHi}</span><span>${scaleMax.toFixed(0)}</span></div>
             <div className="tscroll"><table className="lens">
-              <thead><tr><th>Lens</th><th>Basis (live)</th><th>Multiple</th><th>Fair range</th></tr></thead>
+              <thead><tr><th>Lens</th><th>Basis (live)</th><th>Multiple ({scn})</th><th>Fair range</th></tr></thead>
               <tbody>
-                <tr><td>Fee multiple</td><td className="num">{usd(m.value_accrual.annual_gas_fees_usd)}/yr fees</td><td className="num">P/F {nf(m.value_accrual.price_to_fees_ratio)}×</td><td className="rng num">${m.valuation.lenses_usd.fee_multiple[0]}–${m.valuation.lenses_usd.fee_multiple[1]}</td></tr>
-                <tr><td>TVL multiple</td><td className="num">{usd(m.defi.tvl_usd)} TVL</td><td className="num">Mcap/TVL {m.defi.mcap_to_tvl}×</td><td className="rng num">${m.valuation.lenses_usd.tvl_multiple[0]}–${m.valuation.lenses_usd.tvl_multiple[1]}</td></tr>
-                <tr><td>Active-user</td><td className="num">{compact(m.adoption.active_accounts_90d_avg)} active/day</td><td className="num">$40K–120K / acct</td><td className="rng num">${m.valuation.lenses_usd.active_user[0]}–${m.valuation.lenses_usd.active_user[1]}</td></tr>
+                <tr><td>Fee multiple</td><td className="num">{usd(m.value_accrual.annual_gas_fees_usd)}/yr fees · now P/F {nf(m.value_accrual.price_to_fees_ratio)}×</td><td className="num">P/F {nf(S.pf[0])}–{nf(S.pf[1])}×</td><td className="rng num">${L.fee[0]}–${L.fee[1]}</td></tr>
+                <tr><td>TVL multiple</td><td className="num">{usd(m.defi.tvl_usd)} TVL · now {m.defi.mcap_to_tvl}×</td><td className="num">Mcap/TVL {S.mt[0]}–{S.mt[1]}×</td><td className="rng num">${L.tvl[0]}–${L.tvl[1]}</td></tr>
+                <tr><td>Active-user</td><td className="num">{compact(m.adoption.active_accounts_90d_avg)} active/day</td><td className="num">${compact(S.per_user[0])}–{compact(S.per_user[1])} / acct</td><td className="rng num">${L.usr[0]}–${L.usr[1]}</td></tr>
               </tbody>
             </table></div>
+            <div className="scnnote">Base = model defaults (blended ${lo}–${hi}). Bear/Bull swap the peer multiples and recompute the median-of-lenses band live in your browser.</div>
             <div className="caveat"><b>Method &amp; caveat.</b> The band is the median of three peer-multiple lenses applied to live metrics — a defensible range, not a forecast (edit the multiples in <code>model/thesis_model.py</code> and re-run). NVT is deliberately excluded: NEARBlocks <code>txn_volume_usd</code> over-counts system and staking transfers (implying an unreliable NVT of {m.nvt_caveat.current_nvt}). The main bear case is thin fee capture — fee yield is just {(m.value_accrual.fee_yield_vs_mcap*100).toFixed(2)}% of market cap.</div>
           </div>
         </div>

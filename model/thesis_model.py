@@ -41,6 +41,7 @@ aa_now, aa_prev = avg(last90, "active_accounts"), avg(prev90, "active_accounts")
 tx_now, tx_prev = avg(last90, "txns"), avg(prev90, "txns")
 aa_growth = aa_now / aa_prev - 1
 tx_growth = tx_now / tx_prev - 1
+fee_growth = avg(last90, "gas_fee_near") / avg(prev90, "gas_fee_near") - 1
 
 # --- Fee value accrual (real economic demand for blockspace) ---
 daily_fee_near = avg(last90, "gas_fee_near")
@@ -97,6 +98,7 @@ out = {
         "active_accounts_growth_qoq": round(aa_growth, 4),
         "txns_90d_avg": round(tx_now),
         "txns_growth_qoq": round(tx_growth, 4),
+        "fees_growth_qoq": round(fee_growth, 4),
     },
     "value_accrual": {
         "annual_gas_fees_near": round(annual_fee_near),
@@ -113,6 +115,12 @@ out = {
         "current_price_usd": price,
         "lenses_usd": lenses,
         "blended_fair_range_usd": [round(blended_low, 2), round(blended_high, 2)],
+        "scenarios": {
+            "bear": {"pf": [1000, 3000], "mt": [8, 20], "per_user": [20000, 60000]},
+            "base": {"pf": [PF_LOW, PF_HIGH], "mt": [MT_LOW, MT_HIGH], "per_user": [PER_USER_LOW, PER_USER_HIGH]},
+            "bull": {"pf": [4000, 10000], "mt": [30, 70], "per_user": [80000, 200000]},
+        },
+        "basis": {"annual_fees_usd": annual_fee_usd, "tvl_usd": tvl_now, "active_accounts": aa_now, "circ_supply": circ_supply},
         "method": "Median of 3 independent peer-multiple lenses (fees, TVL, active users). Assumption-driven, not a forecast. Edit the multiples at the top of model/thesis_model.py to re-run.",
     },
     "nvt_caveat": {

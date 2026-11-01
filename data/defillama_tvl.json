@@ -1,7 +1,7 @@
 {
   "source": "DefiLlama historicalChainTvl/Near",
   "url": "https://api.llama.fi/v2/historicalChainTvl/Near",
-  "fetched_at": "2026-11-01T09:29:10.569Z",
+  "fetched_at": "2026-11-01T10:53:45.624Z",
   "rows": [
     {
       "date": "2021-08-20",
@@ -7601,7 +7601,7 @@
     },
     {
       "date": "2026-11-01",
-      "tvl_usd": 200055369
+      "tvl_usd": 199510903
     }
   ]
 }

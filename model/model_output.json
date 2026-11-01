@@ -1,21 +1,22 @@
 {
   "generated_at": "2026-11-01",
   "inputs": {
-    "price_usd": 4.37,
-    "market_cap_usd": 5731275936,
+    "price_usd": 4.39,
+    "market_cap_usd": 5747533546,
     "circulating_supply_near": 1249836992,
-    "total_supply_near": 1310524638
+    "total_supply_near": 1310524613
   },
   "adoption": {
     "active_accounts_90d_avg": 71890,
     "active_accounts_growth_qoq": -0.3316,
     "txns_90d_avg": 737899,
-    "txns_growth_qoq": -0.0599
+    "txns_growth_qoq": -0.0599,
+    "fees_growth_qoq": 0.2062
   },
   "value_accrual": {
     "annual_gas_fees_near": 395626,
-    "annual_gas_fees_usd": 1728885,
-    "price_to_fees_ratio": 3315,
+    "annual_gas_fees_usd": 1736798,
+    "price_to_fees_ratio": 3309,
     "fee_yield_vs_mcap": 0.000302
   },
   "security": {
@@ -25,19 +26,19 @@
     "num_validators": 373
   },
   "defi": {
-    "tvl_usd": 200055369,
-    "mcap_to_tvl": 28.6
+    "tvl_usd": 199510903,
+    "mcap_to_tvl": 28.8
   },
   "valuation": {
-    "current_price_usd": 4.37,
+    "current_price_usd": 4.39,
     "lenses_usd": {
       "fee_multiple": [
-        2.77,
-        8.3
+        2.78,
+        8.34
       ],
       "tvl_multiple": [
-        2.4,
-        6.4
+        2.39,
+        6.39
       ],
       "active_user": [
         2.3,
@@ -45,9 +46,59 @@
       ]
     },
     "blended_fair_range_usd": [
-      2.4,
+      2.39,
       6.9
     ],
+    "scenarios": {
+      "bear": {
+        "pf": [
+          1000,
+          3000
+        ],
+        "mt": [
+          8,
+          20
+        ],
+        "per_user": [
+          20000,
+          60000
+        ]
+      },
+      "base": {
+        "pf": [
+          2000,
+          6000
+        ],
+        "mt": [
+          15,
+          40
+        ],
+        "per_user": [
+          40000,
+          120000
+        ]
+      },
+      "bull": {
+        "pf": [
+          4000,
+          10000
+        ],
+        "mt": [
+          30,
+          70
+        ],
+        "per_user": [
+          80000,
+          200000
+        ]
+      }
+    },
+    "basis": {
+      "annual_fees_usd": 1736797.7438867805,
+      "tvl_usd": 199510903,
+      "active_accounts": 71890.4,
+      "circ_supply": 1249836992.159308
+    },
     "method": "Median of 3 independent peer-multiple lenses (fees, TVL, active users). Assumption-driven, not a forecast. Edit the multiples at the top of model/thesis_model.py to re-run."
   },
   "nvt_caveat": {

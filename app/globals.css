@@ -130,3 +130,18 @@ code{word-break:break-word}
   .valnow span{font-size:10.5px}
   .scale{font-size:10.5px}
 }
+.diverge{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #e5e7eb;border-radius:6px;margin-top:14px;background:#fff}
+.diverge>div{padding:10px 14px;border-right:1px solid #e5e7eb;display:flex;flex-direction:column;gap:2px}
+.diverge>div:last-child{border-right:0}
+.diverge .l{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.04em}
+.diverge .num{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.up{color:#059669}.down{color:#b45309}
+.scnbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid #eef0f2}
+.scnl{font-size:11px;color:#6b7280;text-transform:uppercase;letter-spacing:.04em}
+.seg{display:inline-flex;border:1px solid #e5e7eb;border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:13px;padding:6px 16px;background:#fff;border:0;border-right:1px solid #e5e7eb;cursor:pointer;color:#374151}
+.seg button:last-child{border-right:0}
+.seg button.on{background:#0b0d0e;color:#fff;box-shadow:inset 0 -2px 0 #00ec97}
+.scnv{font-size:13px;color:#0b0d0e;margin-left:auto;font-variant-numeric:tabular-nums}
+.scnnote{font-size:12px;color:#6b7280;margin-top:10px}
+@media (max-width:640px){.diverge{grid-template-columns:1fr 1fr}.diverge>div:nth-child(2){border-right:0}.diverge>div:nth-child(-n+2){border-bottom:1px solid #e5e7eb}.scnv{margin-left:0;width:100%}}
