@@ -1,7 +1,7 @@
 {
   "source": "NEAR RPC validators",
   "url": "https://rpc.mainnet.near.org",
-  "fetched_at": "2026-11-01T09:22:00.590Z",
+  "fetched_at": "2026-11-01T09:29:10.569Z",
   "data": {
     "num_validators": 373,
     "total_staked_near": 591910330.809522,

@@ -1,9 +1,10 @@
 {
   "generated_at": "2026-11-01",
   "inputs": {
-    "price_usd": 4.38,
-    "market_cap_usd": 5743706216.0,
-    "circulating_supply_near": 1249836992.159308
+    "price_usd": 4.37,
+    "market_cap_usd": 5731275936,
+    "circulating_supply_near": 1249836992,
+    "total_supply_near": 1310524638
   },
   "adoption": {
     "active_accounts_90d_avg": 71890,
@@ -13,7 +14,8 @@
   },
   "value_accrual": {
     "annual_gas_fees_near": 395626,
-    "annual_gas_fees_usd": 1732841,
+    "annual_gas_fees_usd": 1728885,
+    "price_to_fees_ratio": 3315,
     "fee_yield_vs_mcap": 0.000302
   },
   "security": {
@@ -22,16 +24,34 @@
     "staked_ratio": 0.4736,
     "num_validators": 373
   },
-  "valuation_band_nvt": {
-    "annual_onchain_volume_usd": 65198983960,
-    "current_nvt": 0.09,
-    "assumed_fair_nvt_range": [
-      20,
-      60
-    ],
-    "fair_price_low_usd": 1043.32,
-    "fair_price_high_usd": 3129.96,
-    "current_price_usd": 4.38
+  "defi": {
+    "tvl_usd": 200055369,
+    "mcap_to_tvl": 28.6
   },
-  "note": "Valuation band is assumption-driven (NVT multiples), not a prediction. Change the multiples in model/thesis_model.py to re-run with your own assumptions."
+  "valuation": {
+    "current_price_usd": 4.37,
+    "lenses_usd": {
+      "fee_multiple": [
+        2.77,
+        8.3
+      ],
+      "tvl_multiple": [
+        2.4,
+        6.4
+      ],
+      "active_user": [
+        2.3,
+        6.9
+      ]
+    },
+    "blended_fair_range_usd": [
+      2.4,
+      6.9
+    ],
+    "method": "Median of 3 independent peer-multiple lenses (fees, TVL, active users). Assumption-driven, not a forecast. Edit the multiples at the top of model/thesis_model.py to re-run."
+  },
+  "nvt_caveat": {
+    "current_nvt": 0.088,
+    "note": "NVT excluded from the fair-value range: NEARBlocks txn_volume_usd over-counts system/staking/refund transfers, so NVT is unreliable. Shown for transparency only."
+  }
 }

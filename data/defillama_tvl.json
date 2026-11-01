@@ -1,7 +1,7 @@
 {
   "source": "DefiLlama historicalChainTvl/Near",
   "url": "https://api.llama.fi/v2/historicalChainTvl/Near",
-  "fetched_at": "2026-11-01T09:22:00.590Z",
+  "fetched_at": "2026-11-01T09:29:10.569Z",
   "rows": [
     {
       "date": "2021-08-20",

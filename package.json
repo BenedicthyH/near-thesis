@@ -7,7 +7,16 @@
   "scripts": {
     "fetch": "node scripts/fetch_data.mjs",
     "model": "python3 model/thesis_model.py",
-    "build": "npm run fetch && npm run model"
+    "build": "npm run fetch && npm run model",
+    "dev": "next dev",
+    "site": "next build",
+    "start": "next start"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.12.7"
+  }
 }

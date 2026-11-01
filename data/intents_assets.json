@@ -1,7 +1,7 @@
 {
   "source": "NEAR Intents 1Click /v0/tokens",
   "url": "https://1click.chaindefuser.com/v0/tokens",
-  "fetched_at": "2026-11-01T09:22:00.590Z",
+  "fetched_at": "2026-11-01T09:29:10.569Z",
   "data": {
     "asset_count": 210,
     "chains_supported": 38,

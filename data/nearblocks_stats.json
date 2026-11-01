@@ -1,24 +1,24 @@
 {
   "source": "NEARBlocks /v1/stats",
   "url": "https://api.nearblocks.io/v1/stats",
-  "fetched_at": "2026-11-01T09:22:00.590Z",
+  "fetched_at": "2026-11-01T09:29:10.569Z",
   "data": {
     "id": 1,
-    "total_supply": "1310524639731133652691441965551017",
+    "total_supply": "1310524637717281419128794965551017",
     "circulating_supply": "1249836992159308065117756741322730",
-    "avg_block_time": "0.56070000",
+    "avg_block_time": "0.70590000",
     "gas_price": "100000000",
     "nodes_online": 373,
-    "near_price": "4.38000000",
-    "near_btc_price": "0.00005609",
-    "market_cap": "5743706216.00000000",
-    "volume": "505643857.00000000",
+    "near_price": "4.37000000",
+    "near_btc_price": "0.00005608",
+    "market_cap": "5731275936.00000000",
+    "volume": "508124288.00000000",
     "high_24h": "4.56000000",
     "high_all": "20.44000000",
     "low_24h": "4.31000000",
     "low_all": "0.52676200",
-    "change_24": "1.31444000",
-    "total_txns": "5472575919",
+    "change_24": "1.13668000",
+    "total_txns": "5472578414",
     "tps": 6
   }
 }
