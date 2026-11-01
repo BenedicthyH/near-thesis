@@ -1,0 +1,13 @@
+{
+  "name": "near-thesis",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Evidence-first NEAR investment thesis: live onchain analytics dashboard + re-runnable model",
+  "type": "module",
+  "scripts": {
+    "fetch": "node scripts/fetch_data.mjs",
+    "model": "python3 model/thesis_model.py",
+    "build": "npm run fetch && npm run model"
+  },
+  "license": "MIT"
+}

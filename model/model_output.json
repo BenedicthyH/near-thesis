@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-11-01",
+  "inputs": {
+    "price_usd": 4.38,
+    "market_cap_usd": 5743706216.0,
+    "circulating_supply_near": 1249836992.159308
+  },
+  "adoption": {
+    "active_accounts_90d_avg": 71890,
+    "active_accounts_growth_qoq": -0.3316,
+    "txns_90d_avg": 737899,
+    "txns_growth_qoq": -0.0599
+  },
+  "value_accrual": {
+    "annual_gas_fees_near": 395626,
+    "annual_gas_fees_usd": 1732841,
+    "fee_yield_vs_mcap": 0.000302
+  },
+  "security": {
+    "staked_near": 591910331,
+    "circulating_near": 1249836992,
+    "staked_ratio": 0.4736,
+    "num_validators": 373
+  },
+  "valuation_band_nvt": {
+    "annual_onchain_volume_usd": 65198983960,
+    "current_nvt": 0.09,
+    "assumed_fair_nvt_range": [
+      20,
+      60
+    ],
+    "fair_price_low_usd": 1043.32,
+    "fair_price_high_usd": 3129.96,
+    "current_price_usd": 4.38
+  },
+  "note": "Valuation band is assumption-driven (NVT multiples), not a prediction. Change the multiples in model/thesis_model.py to re-run with your own assumptions."
+}
