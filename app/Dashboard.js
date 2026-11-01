@@ -203,14 +203,14 @@ export default function Dashboard({ data }) {
               <div className="valnow" style={{ left: leftPct(price) + '%' }}><span>now ${price}</span></div>
             </div>
             <div className="scale num"><span>$0</span><span>fair ${lo}–${hi}</span><span>${scaleMax.toFixed(0)}</span></div>
-            <table className="lens">
+            <div className="tscroll"><table className="lens">
               <thead><tr><th>Lens</th><th>Basis (live)</th><th>Multiple</th><th>Fair range</th></tr></thead>
               <tbody>
                 <tr><td>Fee multiple</td><td className="num">{usd(m.value_accrual.annual_gas_fees_usd)}/yr fees</td><td className="num">P/F {nf(m.value_accrual.price_to_fees_ratio)}×</td><td className="rng num">${m.valuation.lenses_usd.fee_multiple[0]}–${m.valuation.lenses_usd.fee_multiple[1]}</td></tr>
                 <tr><td>TVL multiple</td><td className="num">{usd(m.defi.tvl_usd)} TVL</td><td className="num">Mcap/TVL {m.defi.mcap_to_tvl}×</td><td className="rng num">${m.valuation.lenses_usd.tvl_multiple[0]}–${m.valuation.lenses_usd.tvl_multiple[1]}</td></tr>
                 <tr><td>Active-user</td><td className="num">{compact(m.adoption.active_accounts_90d_avg)} active/day</td><td className="num">$40K–120K / acct</td><td className="rng num">${m.valuation.lenses_usd.active_user[0]}–${m.valuation.lenses_usd.active_user[1]}</td></tr>
               </tbody>
-            </table>
+            </table></div>
             <div className="caveat"><b>Method &amp; caveat.</b> The band is the median of three peer-multiple lenses applied to live metrics — a defensible range, not a forecast (edit the multiples in <code>model/thesis_model.py</code> and re-run). NVT is deliberately excluded: NEARBlocks <code>txn_volume_usd</code> over-counts system and staking transfers (implying an unreliable NVT of {m.nvt_caveat.current_nvt}). The main bear case is thin fee capture — fee yield is just {(m.value_accrual.fee_yield_vs_mcap*100).toFixed(2)}% of market cap.</div>
           </div>
         </div>

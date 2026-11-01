@@ -95,3 +95,38 @@ table.lens td.rng{font-weight:600;color:var(--ink)}
 
 .pageft{margin-top:46px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:12px;line-height:1.6}
 @media(max-width:860px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.kpi{border-bottom:1px solid var(--line)}}
+
+/* ---- responsive ---- */
+html,body{overflow-x:hidden;-webkit-text-size-adjust:100%}
+.hero h1{font-size:clamp(22px,5.4vw,30px)}
+.kpi .v{font-size:clamp(20px,5.6vw,26px)}
+.card,.kpi,.grid>*{min-width:0}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px}
+table.lens{min-width:520px}
+.nav-in{overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+.nav-in::-webkit-scrollbar{display:none}
+.nav a{flex:0 0 auto}
+code{word-break:break-word}
+@media(max-width:860px){
+  .kpi:nth-child(2n){border-right:none}
+  .kpi:last-child{grid-column:1 / -1}
+}
+@media(max-width:600px){
+  .topbar-in{padding:10px 16px;gap:10px;flex-wrap:wrap}
+  .brand img{height:18px}
+  .brand .prod{font-size:13px}
+  .topbar{position:static}
+  .topbar .spacer{display:none}
+  .topbar .meta{flex-basis:100%;font-size:11px}
+  .nav{top:0}
+  .nav-in{padding:0 16px;gap:20px}
+  .wrap{padding:20px 16px 50px}
+  .hero p.sub{font-size:14px}
+  .thesis{padding:12px 14px;font-size:13.5px}
+  .kpi{padding:12px 14px}
+  .sec{margin:28px 0 12px}
+  .card{padding:14px}
+  .grid{gap:12px}
+  .valnow span{font-size:10.5px}
+  .scale{font-size:10.5px}
+}
