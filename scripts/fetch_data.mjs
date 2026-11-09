@@ -79,11 +79,13 @@ async function staking() {
 async function intentsAssets() {
   const tokens = await getJSON('https://1click.chaindefuser.com/v0/tokens');
   const chains = [...new Set(tokens.map(t => t.blockchain))];
+  const per_chain = {};
+  for (const t of tokens) per_chain[t.blockchain] = (per_chain[t.blockchain] || 0) + 1;
   return {
     source: 'NEAR Intents 1Click /v0/tokens',
     url: 'https://1click.chaindefuser.com/v0/tokens',
     fetched_at: now,
-    data: { asset_count: tokens.length, chains_supported: chains.length, chains },
+    data: { asset_count: tokens.length, chains_supported: chains.length, chains, assets_per_chain: per_chain },
   };
 }
 

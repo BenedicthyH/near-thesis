@@ -17,6 +17,7 @@ const compact = (n) => {
   if (a >= 1e3) return (n / 1e3).toFixed(0) + 'K';
   return '' + Math.round(n);
 };
+const d2 = (x) => Number(x).toFixed(2);
 const pct = (x) => (x >= 0 ? '+' : '') + (x * 100).toFixed(1) + '%';
 
 function weekly(rows, key, start = '2021-07-01') {
@@ -34,10 +35,10 @@ const axis = { stroke: AX, fontSize: 10.5, tickLine: false, axisLine: { stroke: 
 const tt = { contentStyle: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, color: INK, fontSize: 12, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }, cursor: { stroke: '#cbd5e1', strokeWidth: 1 } };
 const xTick = (d) => (typeof d === 'string' ? d.slice(2, 7) : d);
 
-function Chart({ id, title, now, take, src, rows, color = SLATE, area = true, fmt = compact }) {
+function Chart({ full, id, title, now, take, src, rows, color = SLATE, area = true, fmt = compact }) {
   const gid = 'grad' + id;
   return (
-    <div className="card">
+    <div className={'card' + (full ? ' full' : '')}>
       <h3>{title}</h3>
       <div className="metnow num">{now}</div>
       <ResponsiveContainer width="100%" height={176}>
@@ -79,7 +80,11 @@ export default function Dashboard({ data }) {
   const tvlRows = (() => { const r = tvl.rows.filter((x) => x.date >= '2021-07-01'); const o = []; for (let i = 0; i < r.length; i += 7) { const c = r.slice(i, i + 7); o.push({ date: c[c.length - 1].date, v: c.reduce((a, x) => a + x.tvl_usd, 0) / c.length }); } return o; })();
   const supply = charts.rows.filter((x) => x.date >= '2021-07-01').filter((_, i) => i % 7 === 0)
     .map((x) => ({ date: x.date, total: x.total_supply, circ: x.circulating_supply }));
-  const chainBars = [...it.chains].slice(0, 16).map((c) => ({ chain: c.toUpperCase(), v: 1 }));
+  const apc = it.assets_per_chain || {};
+  const chainBars = Object.entries(apc).sort((a, b) => b[1] - a[1]).slice(0, 16).map(([c, v]) => ({ chain: c.toUpperCase(), v }));
+  const fpaRows = (() => { const f = weekly(charts.rows, 'gas_fee_near', '2023-01-01'), a = weekly(charts.rows, 'active_accounts', '2023-01-01');
+    return f.map((x, i) => ({ date: x.date, v: a[i] && a[i].v ? x.v / a[i].v : null })).filter((x) => x.v != null); })();
+  const P = m.per_account;
 
   const [lo, hi] = m.valuation.blended_fair_range_usd;
   const V = m.valuation, B = V.basis;
@@ -104,6 +109,7 @@ export default function Dashboard({ data }) {
   const sLo = med([L.fee[0], L.tvl[0], L.usr[0]]), sHi = med([L.fee[1], L.tvl[1], L.usr[1]]);
   const implied = r2((sLo + sHi) / 2), updown = implied / price - 1;
   const verdict = price < sLo ? 'below band: undervalued' : price > sHi ? 'above band: overvalued' : 'inside band: fair value';
+  const baseWhere = price < lo ? 'below its fair-value band' : price > hi ? 'above its fair-value band' : 'inside its fair-value band';
   const scaleMax = Math.max(sHi, price) * 1.15;
   const leftPct = (x) => (x / scaleMax) * 100;
   const aaDown = m.adoption.active_accounts_growth_qoq < 0;
@@ -119,7 +125,7 @@ export default function Dashboard({ data }) {
         </div>
         <span className="tag">Research</span>
         <span className="spacer" />
-        <span className="meta num">Updated {m.generated_at} · all data keyless &amp; reproducible</span>
+        <span className="meta num">Data as of {m.generated_at} · keyless, re-runnable</span>
       </div></div>
 
       <div className="nav"><div className="nav-in">
@@ -131,10 +137,22 @@ export default function Dashboard({ data }) {
 
       <div className="wrap">
         <div className="hero" id="overview">
-          <h1>NEAR's settlement demand is decoupling from speculative growth.</h1>
-          <p className="sub">Every figure on this page is pulled from free public APIs by one command. Nothing is typed in by hand. Anyone can re-run it.</p>
+          <h1>Fewer NEAR accounts are paying more for blockspace.</h1>
+          <p className="sub">A live read of NEAR usage, fees, capital and security, plus a valuation model you can re-run or adjust here. Every figure comes from free public APIs via one command. Nothing is typed in by hand.</p>
+          <div className="insight">
+            <div className="ins-k">
+              <span className="l">Key insight · fees paid per active account, 90d vs prior 90d</span>
+              <span className="big num up">{pct(P.fee_per_account_growth_qoq)}</span>
+              <span className="ins-d num">{P.fee_near_per_active_account_day_prev.toFixed(4)} → {P.fee_near_per_active_account_day.toFixed(4)} Ⓝ per account per day</span>
+            </div>
+            <ol className="read">
+              <li><b>What changed.</b> Active accounts {pct(m.adoption.active_accounts_growth_qoq)} QoQ, fees paid {pct(m.adoption.fees_growth_qoq)}, txns per account {pct(P.txns_per_account_growth_qoq)}. The accounts that stayed are using the chain harder and paying for it.</li>
+              <li><b>What it is worth.</b> Three peer-multiple lenses put fair value at ${d2(lo)} to ${d2(hi)}. At ${d2(price)}, NEAR trades {baseWhere}. Fee capture is still thin ({(m.value_accrual.fee_yield_vs_mcap*100).toFixed(2)}% of market cap), so this is not a discount call.</li>
+              <li><b>What would prove it wrong.</b> Fee growth turning negative, staking below 40% of supply, or NEAR Intents reach ({it.asset_count} assets, {it.chains_supported} chains) flat for two quarters.</li>
+            </ol>
+          </div>
           <div className="thesis">
-            <b>Thesis.</b> Active accounts fell <b>{pct(m.adoption.active_accounts_growth_qoq)}</b> quarter over quarter. Fees paid rose <b>{pct(m.adoption.fees_growth_qoq)}</b>, a <b>{pct(m.security.staked_ratio).replace('+','')}</b> staking ratio held across {st.num_validators} validators, and NEAR Intents now routes <b>{it.asset_count} assets across {it.chains_supported} chains</b>. Fewer accounts are paying more in fees. We read that as usage shifting from incentive farming to paid settlement. Fee capture is still small, so NEAR trades <b>inside its fair-value band</b> (${lo} to ${hi} vs ${price}). The return case depends on that paid usage growing, not on a discount today.
+            <b>Thesis.</b> Active accounts fell <b>{pct(m.adoption.active_accounts_growth_qoq)}</b> quarter over quarter. Fees paid rose <b>{pct(m.adoption.fees_growth_qoq)}</b>, a <b>{pct(m.security.staked_ratio).replace('+','')}</b> staking ratio held across {st.num_validators} validators, and NEAR Intents now routes <b>{it.asset_count} assets across {it.chains_supported} chains</b>. We read that as usage shifting from incentive farming to paid settlement. Fee capture is still small, so NEAR trades <b>{baseWhere}</b> (${d2(lo)} to ${d2(hi)} vs ${d2(price)}). The return case depends on paid usage growing, not on a discount today.
           </div>
           <div className="diverge">
             <div><span className="l">Active accounts QoQ</span><span className="num down">{pct(m.adoption.active_accounts_growth_qoq)}</span></div>
@@ -145,7 +163,7 @@ export default function Dashboard({ data }) {
         </div>
 
         <div className="kpis">
-          <div className="kpi"><div className="l">NEAR price</div><div className="v num">${price}</div><div className="d flat num">{usd(s.market_cap)} mcap</div></div>
+          <div className="kpi"><div className="l">NEAR price</div><div className="v num">${d2(price)}</div><div className="d flat num">{usd(s.market_cap)} mcap</div></div>
           <div className="kpi"><div className="l">Active accts / day</div><div className="v num">{compact(m.adoption.active_accounts_90d_avg)}</div><div className={'d num ' + (aaDown ? 'down' : 'up')}>{pct(m.adoption.active_accounts_growth_qoq)} QoQ</div></div>
           <div className="kpi"><div className="l">Txns / day</div><div className="v num">{compact(m.adoption.txns_90d_avg)}</div><div className={'d num ' + (txDown ? 'down' : 'up')}>{pct(m.adoption.txns_growth_qoq)} QoQ</div></div>
           <div className="kpi"><div className="l">Staked supply</div><div className="v num">{pct(m.security.staked_ratio).replace('+','')}</div><div className="d flat num">{st.num_validators} validators</div></div>
@@ -166,6 +184,9 @@ export default function Dashboard({ data }) {
           <Chart id="fee" title="Gas fees paid (NEAR)" now={compact(m.value_accrual.annual_gas_fees_near) + ' Ⓝ / yr annualized'} color={GREEN}
             take={<>Used in valuation instead of USD transfer volume, which is overstated.<span className="cap">Bullish. Fees {pct(m.adoption.fees_growth_qoq)} QoQ while accounts fell.</span></>}
             src="api.nearblocks.io/v1/charts → gas_fee · weekly avg" rows={fees} fmt={(v) => compact(v)} />
+          <Chart full id="fpa" title="Fees paid per active account (NEAR / day)" now={P.fee_near_per_active_account_day.toFixed(4) + ' Ⓝ · ' + pct(P.fee_per_account_growth_qoq) + ' QoQ'} color={GREEN}
+            take={<>Derived: weekly gas fees divided by weekly active accounts. This is the core of the thesis.<span className="cap">Bullish. Each remaining account pays more. Watch whether total accounts stabilize.</span></>}
+            src="api.nearblocks.io/v1/charts → gas_fee ÷ active_accounts · weekly avg, since 2023" rows={fpaRows} fmt={(v) => v.toFixed(3)} />
         </div>
 
         <div className="sec" id="network"><h2>Capital &amp; network security</h2></div>
@@ -208,17 +229,17 @@ export default function Dashboard({ data }) {
 
           <div className="card">
             <h3>NEAR Intents reach</h3>
-            <div className="metnow num">{it.asset_count} assets · {it.chains_supported} chains routable</div>
+            <div className="metnow num">{it.asset_count} assets · {it.chains_supported} chains routable · {apc.near || 0} on NEAR, {it.asset_count - (apc.near || 0)} elsewhere</div>
             <ResponsiveContainer width="100%" height={176}>
               <BarChart data={chainBars} margin={{ top: 4, right: 6, left: 0, bottom: 0 }}>
                 <CartesianGrid stroke={GRID} vertical={false} />
                 <XAxis dataKey="chain" {...axis} interval={0} angle={-45} textAnchor="end" height={48} fontSize={9} />
-                <YAxis hide />
-                <Tooltip {...tt} formatter={() => 'supported'} />
+                <YAxis {...axis} width={28} allowDecimals={false} />
+                <Tooltip {...tt} formatter={(v) => [v + ' assets', 'Routable']} />
                 <Bar isAnimationActive={false} dataKey="v" fill={SLATE2} radius={[2, 2, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-            <div className="foot"><div className="take">NEAR settles swaps across chains, so usage can grow when the end asset isn't NEAR.<span className="cap">Bullish but unproven. Volume routed is the next thing to check.</span></div><div className="src">1click.chaindefuser.com/v0/tokens (first 16 of {it.chains_supported} chains)</div></div>
+            <div className="foot"><div className="take">NEAR settles swaps across chains, so usage can grow when the end asset isn't NEAR.<span className="cap">Bullish but unproven. Volume routed is the next thing to check.</span></div><div className="src">1click.chaindefuser.com/v0/tokens → assets per chain, top 16 of {it.chains_supported}</div></div>
           </div>
         </div>
 
@@ -234,25 +255,25 @@ export default function Dashboard({ data }) {
               </div>
               {scn === 'custom' && <span className="tag">Custom</span>}
               <button className="reset" onClick={() => pick('base')}>Reset to Base</button>
-              <span className="scnv num">Implied ${implied} · <span className={updown >= 0 ? 'up' : 'down'}>{pct(updown)}</span> vs ${price}</span>
+              <span className="scnv num">Implied ${d2(implied)} · <span className={updown >= 0 ? 'up' : 'down'}>{pct(updown)}</span> vs ${d2(price)}</span>
             </div>
             <h3>Fair value: three lenses</h3>
-            <div className="metnow num">{scnLabel} fair range ${sLo} to ${sHi} · current ${price} · {verdict}</div>
+            <div className="metnow num">{scnLabel} fair range ${d2(sLo)} to ${d2(sHi)} · current ${d2(price)} · {verdict}</div>
             <div className="valbar">
               <div className="valrange" style={{ left: leftPct(sLo) + '%', width: (leftPct(sHi) - leftPct(sLo)) + '%' }} />
-              <div className="valnow" style={{ left: leftPct(price) + '%' }}><span>now ${price}</span></div>
+              <div className="valnow" style={{ left: leftPct(price) + '%' }}><span>now ${d2(price)}</span></div>
             </div>
-            <div className="scale num"><span>$0</span><span>fair ${sLo} to ${sHi}</span><span>${scaleMax.toFixed(0)}</span></div>
+            <div className="scale num"><span>$0</span><span>fair ${d2(sLo)} to ${d2(sHi)}</span><span>${scaleMax.toFixed(0)}</span></div>
             <div className="tscroll"><table className="lens">
-              <thead><tr><th>Lens</th><th>Basis (live)</th><th>Multiple ({scnLabel.toLowerCase()})</th><th>Fair range</th></tr></thead>
+              <thead><tr><th>Lens</th><th>Basis (live)</th><th>Multiple <span className="asm">assumption</span> ({scnLabel.toLowerCase()})</th><th>Fair range</th></tr></thead>
               <tbody>
-                <tr><td>Fee multiple</td><td className="num">{usd(m.value_accrual.annual_gas_fees_usd)}/yr fees · now P/F {nf(m.value_accrual.price_to_fees_ratio)}×</td><td className="num">P/F {nf(S.pf[0])}-{nf(S.pf[1])}×</td><td className="rng num">${L.fee[0]} to ${L.fee[1]}</td></tr>
-                <tr><td>TVL multiple</td><td className="num">{usd(m.defi.tvl_usd)} TVL · now {m.defi.mcap_to_tvl}×</td><td className="num">Mcap/TVL {S.mt[0]}-{S.mt[1]}×</td><td className="rng num">${L.tvl[0]} to ${L.tvl[1]}</td></tr>
-                <tr><td>Active-user</td><td className="num">{compact(m.adoption.active_accounts_90d_avg)} active/day</td><td className="num">${compact(S.per_user[0])}-{compact(S.per_user[1])} / acct</td><td className="rng num">${L.usr[0]} to ${L.usr[1]}</td></tr>
+                <tr><td>Fee multiple</td><td className="num">{usd(m.value_accrual.annual_gas_fees_usd)}/yr fees · now P/F {nf(m.value_accrual.price_to_fees_ratio)}×</td><td className="num">P/F {nf(S.pf[0])}-{nf(S.pf[1])}×</td><td className="rng num">${d2(L.fee[0])} to ${d2(L.fee[1])}</td></tr>
+                <tr><td>TVL multiple</td><td className="num">{usd(m.defi.tvl_usd)} TVL · now {m.defi.mcap_to_tvl}×</td><td className="num">Mcap/TVL {S.mt[0]}-{S.mt[1]}×</td><td className="rng num">${d2(L.tvl[0])} to ${d2(L.tvl[1])}</td></tr>
+                <tr><td>Active-user</td><td className="num">{compact(m.adoption.active_accounts_90d_avg)} active/day</td><td className="num">${compact(S.per_user[0])}-{compact(S.per_user[1])} / acct</td><td className="rng num">${d2(L.usr[0])} to ${d2(L.usr[1])}</td></tr>
               </tbody>
             </table></div>
             <div className="assume">
-              <div className="assume-h">Assumptions. Drag or type. Values above update live.</div>
+              <div className="assume-h">Assumptions, not data. Drag or type a multiple; band, implied price and verdict update instantly.</div>
               {[
                 ['pf', 'Price-to-fees multiple', 100, 20000, 100, (v) => nf(v) + '×'],
                 ['mt', 'Market-cap / TVL multiple', 1, 150, 1, (v) => v + '×'],
@@ -271,7 +292,7 @@ export default function Dashboard({ data }) {
                 </div>
               ))}
             </div>
-            <div className="scnnote">Base = model defaults (blended ${lo} to ${hi}). Bear and Bull load preset multiples. A manual edit switches to Custom. Band, implied price and verdict recompute in the browser.</div>
+            <div className="scnnote">Base = model defaults (blended ${d2(lo)} to ${d2(hi)}). Bear and Bull load preset multiples. All multiples are our assumptions, set from peer L1 ranges; the metrics they multiply are live data. A manual edit switches to Custom. Band, implied price and verdict recompute in the browser.</div>
             <div className="risks">
               <b>What would change our mind</b>
               <ul>
@@ -286,7 +307,7 @@ export default function Dashboard({ data }) {
         </div>
 
         <div className="pageft">
-          Model generated {m.generated_at}. Sources: NEARBlocks, DefiLlama, NEAR RPC, NEAR Intents (1Click). All free and keyless. Rebuild with <code>npm run build</code>. NEAR HACKATHON, Investment Thesis track. Not financial advice.
+          Model generated {m.generated_at}. QoQ = last 90 days ({m.adoption.window.last90[0]} to {m.adoption.window.last90[1]}) vs the 90 days before. Sources, fetched {charts.fetched_at.slice(0, 16).replace('T', ' ')} UTC: NEARBlocks, DefiLlama, NEAR RPC, NEAR Intents (1Click). All free and keyless. Rebuild with <code>npm run build</code>. NEAR HACKATHON, Investment Thesis track. Not financial advice.
         </div>
       </div>
     </>

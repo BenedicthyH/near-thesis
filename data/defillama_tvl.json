@@ -1,7 +1,7 @@
 {
   "source": "DefiLlama historicalChainTvl/Near",
   "url": "https://api.llama.fi/v2/historicalChainTvl/Near",
-  "fetched_at": "2026-11-01T10:58:25.045Z",
+  "fetched_at": "2026-11-09T19:43:25.032Z",
   "rows": [
     {
       "date": "2021-08-20",
@@ -7601,7 +7601,39 @@
     },
     {
       "date": "2026-11-01",
-      "tvl_usd": 199510903
+      "tvl_usd": 201698869
+    },
+    {
+      "date": "2026-11-02",
+      "tvl_usd": 195416230
+    },
+    {
+      "date": "2026-11-03",
+      "tvl_usd": 178319326
+    },
+    {
+      "date": "2026-11-04",
+      "tvl_usd": 180105702
+    },
+    {
+      "date": "2026-11-05",
+      "tvl_usd": 187460483
+    },
+    {
+      "date": "2026-11-06",
+      "tvl_usd": 172956530
+    },
+    {
+      "date": "2026-11-07",
+      "tvl_usd": 176426962
+    },
+    {
+      "date": "2026-11-08",
+      "tvl_usd": 175085497
+    },
+    {
+      "date": "2026-11-09",
+      "tvl_usd": 168613152
     }
   ]
 }

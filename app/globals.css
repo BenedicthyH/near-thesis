@@ -162,3 +162,15 @@ code{word-break:break-word}
 .risks{margin-top:14px;border:1px solid #e5e7eb;border-left:3px solid #b45309;border-radius:6px;padding:12px 14px;font-size:13px}
 .risks ul{margin:8px 0 0;padding-left:18px}.risks li{margin:4px 0;color:#374151}
 @media (max-width:760px){.arow{grid-template-columns:1fr}.actl{grid-template-columns:30px 1fr 72px 52px}}
+
+/* v5: key insight + read */
+.insight{display:grid;grid-template-columns:260px 1fr;border:1px solid var(--line);border-radius:6px;margin:22px 0 0;background:#fff}
+.ins-k{padding:16px 18px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;background:var(--subtle)}
+.ins-k .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;line-height:1.4}
+.ins-k .big{font-size:40px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.ins-d{font-size:12px;color:var(--ink2)}
+ol.read{margin:0;padding:14px 18px 14px 36px;font-size:13.5px;line-height:1.55;color:var(--ink2)}
+ol.read li{margin:3px 0 7px}ol.read li:last-child{margin-bottom:0}
+ol.read b{color:var(--ink);font-weight:600}
+.asm{font-size:9.5px;letter-spacing:.06em;color:#92400e;border:1px solid #f3d9a4;background:#fffbeb;border-radius:3px;padding:1px 5px;margin:0 2px;vertical-align:1px}
+@media(max-width:760px){.insight{grid-template-columns:1fr}.ins-k{border-right:0;border-bottom:1px solid var(--line)}.ins-k .big{font-size:34px}ol.read{padding:12px 14px 12px 30px;font-size:13px}}

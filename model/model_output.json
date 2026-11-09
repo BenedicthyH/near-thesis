@@ -1,53 +1,71 @@
 {
-  "generated_at": "2026-11-01",
+  "generated_at": "2026-11-09",
   "inputs": {
-    "price_usd": 4.38,
-    "market_cap_usd": 5737517401,
+    "price_usd": 3.64,
+    "market_cap_usd": 4775269081,
     "circulating_supply_near": 1249836992,
-    "total_supply_near": 1310524612
+    "total_supply_near": 1311267155
   },
   "adoption": {
-    "active_accounts_90d_avg": 71890,
-    "active_accounts_growth_qoq": -0.3316,
-    "txns_90d_avg": 737899,
-    "txns_growth_qoq": -0.0599,
-    "fees_growth_qoq": 0.2062
+    "active_accounts_90d_avg": 70742,
+    "active_accounts_growth_qoq": -0.3185,
+    "txns_90d_avg": 736091,
+    "txns_growth_qoq": -0.0509,
+    "fees_growth_qoq": 0.221,
+    "window": {
+      "last90": [
+        "2026-08-11",
+        "2026-11-08"
+      ],
+      "prev90": [
+        "2026-05-13",
+        "2026-08-10"
+      ]
+    }
+  },
+  "per_account": {
+    "fee_near_per_active_account_day": 0.015404,
+    "fee_near_per_active_account_day_prev": 0.008597,
+    "fee_per_account_growth_qoq": 0.7918,
+    "txns_per_active_account_day": 10.41,
+    "txns_per_active_account_day_prev": 7.47,
+    "txns_per_account_growth_qoq": 0.3928
   },
   "value_accrual": {
-    "annual_gas_fees_near": 395626,
-    "annual_gas_fees_usd": 1732841,
-    "price_to_fees_ratio": 3311,
-    "fee_yield_vs_mcap": 0.000302
+    "annual_gas_fees_near": 397733,
+    "annual_gas_fees_usd": 1447749,
+    "price_to_fees_ratio": 3298,
+    "fee_yield_vs_mcap": 0.000303
   },
   "security": {
-    "staked_near": 591910331,
+    "staked_near": 580688854,
     "circulating_near": 1249836992,
-    "staked_ratio": 0.4736,
-    "num_validators": 373
+    "staked_ratio": 0.4646,
+    "num_validators": 339
   },
   "defi": {
-    "tvl_usd": 199510903,
-    "mcap_to_tvl": 28.8
+    "tvl_usd": 168613152,
+    "mcap_to_tvl": 28.3
   },
   "valuation": {
-    "current_price_usd": 4.38,
+    "current_price_usd": 3.64,
     "lenses_usd": {
       "fee_multiple": [
-        2.77,
-        8.32
+        2.32,
+        6.95
       ],
       "tvl_multiple": [
-        2.39,
-        6.39
+        2.02,
+        5.4
       ],
       "active_user": [
-        2.3,
-        6.9
+        2.26,
+        6.79
       ]
     },
     "blended_fair_range_usd": [
-      2.39,
-      6.9
+      2.26,
+      6.79
     ],
     "scenarios": {
       "bear": {
@@ -94,15 +112,15 @@
       }
     },
     "basis": {
-      "annual_fees_usd": 1732841.4847890886,
-      "tvl_usd": 199510903,
-      "active_accounts": 71890.4,
+      "annual_fees_usd": 1447749.3895170435,
+      "tvl_usd": 168613152,
+      "active_accounts": 70741.92222222222,
       "circ_supply": 1249836992.159308
     },
     "method": "Median of 3 independent peer-multiple lenses (fees, TVL, active users). Assumption-driven, not a forecast. Edit the multiples at the top of model/thesis_model.py to re-run."
   },
   "nvt_caveat": {
-    "current_nvt": 0.088,
+    "current_nvt": 0.07,
     "note": "NVT excluded from the fair-value range: NEARBlocks txn_volume_usd over-counts system/staking/refund transfers, so NVT is unreliable. Shown for transparency only."
   }
 }

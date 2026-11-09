@@ -43,6 +43,13 @@ aa_growth = aa_now / aa_prev - 1
 tx_growth = tx_now / tx_prev - 1
 fee_growth = avg(last90, "gas_fee_near") / avg(prev90, "gas_fee_near") - 1
 
+# --- Key insight: fees paid per active account (derived, no new inputs) ---
+fpa_now = avg(last90, "gas_fee_near") / aa_now
+fpa_prev = avg(prev90, "gas_fee_near") / aa_prev
+fpa_growth = fpa_now / fpa_prev - 1
+tpa_now, tpa_prev = tx_now / aa_now, tx_prev / aa_prev
+tpa_growth = tpa_now / tpa_prev - 1
+
 # --- Fee value accrual (real economic demand for blockspace) ---
 daily_fee_near = avg(last90, "gas_fee_near")
 annual_fee_near = daily_fee_near * 365
@@ -99,6 +106,16 @@ out = {
         "txns_90d_avg": round(tx_now),
         "txns_growth_qoq": round(tx_growth, 4),
         "fees_growth_qoq": round(fee_growth, 4),
+        "window": {"last90": [last90[0]["date"], last90[-1]["date"]],
+                   "prev90": [prev90[0]["date"], prev90[-1]["date"]]},
+    },
+    "per_account": {
+        "fee_near_per_active_account_day": round(fpa_now, 6),
+        "fee_near_per_active_account_day_prev": round(fpa_prev, 6),
+        "fee_per_account_growth_qoq": round(fpa_growth, 4),
+        "txns_per_active_account_day": round(tpa_now, 2),
+        "txns_per_active_account_day_prev": round(tpa_prev, 2),
+        "txns_per_account_growth_qoq": round(tpa_growth, 4),
     },
     "value_accrual": {
         "annual_gas_fees_near": round(annual_fee_near),

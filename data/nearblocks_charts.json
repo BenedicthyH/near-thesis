@@ -1,7 +1,7 @@
 {
   "source": "NEARBlocks /v1/charts",
   "url": "https://api.nearblocks.io/v1/charts",
-  "fetched_at": "2026-11-01T10:58:25.045Z",
+  "fetched_at": "2026-11-09T19:43:25.032Z",
   "rows": [
     {
       "date": "2021-01-01",
@@ -27691,6 +27691,110 @@
       "near_price": 4.287445,
       "market_cap": 5618248309.398652,
       "total_supply": 1310472976.2021549,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-01",
+      "txns": 509345,
+      "active_accounts": 46478,
+      "new_accounts": 14317,
+      "active_contracts": 60683,
+      "gas_fee_near": 694.7130101411718,
+      "txn_volume_usd": 84023883.00266796,
+      "near_price": 4.43122666,
+      "market_cap": 5807002813.858446,
+      "total_supply": 1310576026.3527384,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-02",
+      "txns": 522358,
+      "active_accounts": 48060,
+      "new_accounts": 12718,
+      "active_contracts": 49151,
+      "gas_fee_near": 722.1158695892714,
+      "txn_volume_usd": 254141460.4429962,
+      "near_price": 4.28564368,
+      "market_cap": 5616661984.5545635,
+      "total_supply": 1310653085.333937,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-03",
+      "txns": 597189,
+      "active_accounts": 72343,
+      "new_accounts": 8510,
+      "active_contracts": 59087,
+      "gas_fee_near": 784.7966021585128,
+      "txn_volume_usd": 114716359.68875962,
+      "near_price": 3.86338915,
+      "market_cap": 5063562932.229639,
+      "total_supply": 1310754900.1931894,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-04",
+      "txns": 706690,
+      "active_accounts": 79164,
+      "new_accounts": 12874,
+      "active_contracts": 64771,
+      "gas_fee_near": 946.6273410096428,
+      "txn_volume_usd": 172420508.35053423,
+      "near_price": 3.83259177,
+      "market_cap": 5023588472.257163,
+      "total_supply": 1310833180.3943324,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-05",
+      "txns": 848794,
+      "active_accounts": 78560,
+      "new_accounts": 9988,
+      "active_contracts": 77822,
+      "gas_fee_near": 1096.8225217644422,
+      "txn_volume_usd": 135240009.68304744,
+      "near_price": 4.00530373,
+      "market_cap": 5250285061.664021,
+      "total_supply": 1310935481.561497,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-06",
+      "txns": 717484,
+      "active_accounts": 78574,
+      "new_accounts": 6242,
+      "active_contracts": 75369,
+      "gas_fee_near": 968.8306312912648,
+      "txn_volume_usd": 75164445.71317026,
+      "near_price": 3.65823183,
+      "market_cap": 4795612402.049597,
+      "total_supply": 1311012087.6930802,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-07",
+      "txns": 682432,
+      "active_accounts": 77076,
+      "new_accounts": 5226,
+      "active_contracts": 73823,
+      "gas_fee_near": 790.7100192309973,
+      "txn_volume_usd": 81161468.47066295,
+      "near_price": 3.71036899,
+      "market_cap": 4864338743.108538,
+      "total_supply": 1311114816.6897821,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-08",
+      "txns": 609504,
+      "active_accounts": 79184,
+      "new_accounts": 5018,
+      "active_contracts": 78892,
+      "gas_fee_near": 748.0986896435481,
+      "txn_volume_usd": 39525776.71115057,
+      "near_price": 3.73202929,
+      "market_cap": 4893020398.861515,
+      "total_supply": 1311190871.4361143,
       "circulating_supply": 1249836992.159308
     }
   ]

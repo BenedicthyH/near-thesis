@@ -1,10 +1,10 @@
 {
   "source": "NEAR RPC validators",
   "url": "https://rpc.mainnet.near.org",
-  "fetched_at": "2026-11-01T10:58:25.045Z",
+  "fetched_at": "2026-11-09T19:43:25.032Z",
   "data": {
-    "num_validators": 373,
-    "total_staked_near": 591910330.809522,
-    "epoch_height": 4924
+    "num_validators": 339,
+    "total_staked_near": 580688853.82292,
+    "epoch_height": 4953
   }
 }
