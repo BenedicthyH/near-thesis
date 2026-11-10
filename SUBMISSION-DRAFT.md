@@ -2,13 +2,13 @@
 
 ## X demo post
 ```
-NEAR active accounts fell 31.9% last quarter. Fees paid rose 22.1%.
+NEAR active accounts fell 31.6% last quarter. Fees paid rose 22.6% in NEAR terms.
 
 Fees per active account: +79.2%.
 
-Fewer users, more paid usage. I built a live dashboard and a re-runnable model to price it.
+But the fee base is $1.44M a year against a $4.52B market cap. At peer multiples (ETH, SOL, SUI, APT) NEAR is the priciest chain in the set.
 
-Fair-value band: $2.26 to $6.79. Price: $3.64. Move the sliders and check my math.
+I built a live dashboard and a re-runnable model to test it. Move the sliders and check my math.
 
 https://out-sage-gamma.vercel.app
 
@@ -18,9 +18,11 @@ https://out-sage-gamma.vercel.app
 ## Project description (submission form)
 NEAR Investment Thesis is a live onchain dashboard and a re-runnable valuation
 model for NEAR. One command pulls usage, fee, TVL, staking and NEAR Intents data
-from free public APIs, then values NEAR with three peer-multiple lenses and a
-median fair-value band. The core finding: active accounts fell 31.9% QoQ while
-fees paid per active account rose 79.2%. Users can switch Bear/Base/Bull
+from free public APIs, then values NEAR against live peer data for Ethereum,
+Solana, Sui and Aptos. The core finding: active accounts fell 31.6% QoQ while
+fees paid per active account rose 79.2%. NEAR still trades at a premium to every
+named peer on fees and TVL, and the page shows how much fee growth would close
+that gap. Users can switch Bear/Base/Bull
 scenarios or set every multiple by hand and watch the band, implied price and
 verdict update. The thesis, the evidence against it and the data that would
 falsify it are all on the page.

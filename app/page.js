@@ -13,6 +13,7 @@ export default function Page() {
     tvl: read('data/defillama_tvl.json'),
     staking: read('data/staking.json'),
     intents: read('data/intents_assets.json'),
+    ivol: read('data/intents_volume.json'),
     model: read('model/model_output.json'),
   };
   return <Dashboard data={data} />;
