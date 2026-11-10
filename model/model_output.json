@@ -1,62 +1,200 @@
 {
-  "generated_at": "2026-11-09",
+  "generated_at": "2026-11-10",
   "inputs": {
-    "price_usd": 3.64,
-    "market_cap_usd": 4775269081,
+    "price_usd": 3.62,
+    "circ_mcap_usd": 4524409912,
+    "fdv_usd": 4746973403,
+    "nearblocks_market_cap_field_usd": 4746588591,
     "circulating_supply_near": 1249836992,
-    "total_supply_near": 1311267155
+    "total_supply_near": 1311318620,
+    "supply_note": "All ratios use circulating market cap (price x circulating supply). FDV = price x total supply, shown for reference. NEARBlocks' market_cap field matches FDV."
   },
   "adoption": {
-    "active_accounts_90d_avg": 70742,
-    "active_accounts_growth_qoq": -0.3185,
-    "txns_90d_avg": 736091,
-    "txns_growth_qoq": -0.0509,
-    "fees_growth_qoq": 0.221,
+    "active_accounts_90d_avg": 70686,
+    "active_accounts_growth_qoq": -0.3162,
+    "txns_90d_avg": 738704,
+    "txns_growth_qoq": -0.0457,
+    "fees_growth_qoq": 0.2256,
+    "fees_usd_growth_qoq": 1.3517,
+    "fees_near_90d": 98309,
+    "fees_near_prev90d": 80215,
+    "fees_usd_90d": 377120,
+    "fees_usd_prev90d": 160358,
+    "avg_price_90d": 3.5371,
+    "avg_price_prev90d": 1.9667,
+    "avg_price_growth_qoq": 0.7985,
     "window": {
       "last90": [
-        "2026-08-11",
-        "2026-11-08"
+        "2026-08-12",
+        "2026-11-09"
       ],
       "prev90": [
-        "2026-05-13",
-        "2026-08-10"
+        "2026-05-14",
+        "2026-08-11"
       ]
     }
   },
   "per_account": {
-    "fee_near_per_active_account_day": 0.015404,
-    "fee_near_per_active_account_day_prev": 0.008597,
-    "fee_per_account_growth_qoq": 0.7918,
-    "txns_per_active_account_day": 10.41,
-    "txns_per_active_account_day_prev": 7.47,
-    "txns_per_account_growth_qoq": 0.3928
+    "fee_near_per_active_account_day": 0.015453,
+    "fee_near_per_active_account_day_prev": 0.008622,
+    "fee_per_account_growth_qoq": 0.7923,
+    "txns_per_active_account_day": 10.45,
+    "txns_per_active_account_day_prev": 7.49,
+    "txns_per_account_growth_qoq": 0.3955
   },
   "value_accrual": {
-    "annual_gas_fees_near": 397733,
-    "annual_gas_fees_usd": 1447749,
-    "price_to_fees_ratio": 3298,
-    "fee_yield_vs_mcap": 0.000303
+    "annual_gas_fees_near": 398698,
+    "annual_gas_fees_usd": 1443287,
+    "price_to_fees_ratio": 3135,
+    "fee_yield_vs_mcap": 0.000319,
+    "basis": "circulating market cap"
   },
   "security": {
-    "staked_near": 580688854,
+    "staked_near": 582125159,
     "circulating_near": 1249836992,
-    "staked_ratio": 0.4646,
-    "num_validators": 339
+    "staked_ratio": 0.4658,
+    "num_validators": 351
   },
   "defi": {
-    "tvl_usd": 168613152,
-    "mcap_to_tvl": 28.3
+    "tvl_usd": 169186373,
+    "mcap_to_tvl": 26.7
+  },
+  "intents_volume": {
+    "volume_usd_90d": 12022109144,
+    "volume_usd_prev90d": 6556208066,
+    "volume_growth_qoq": 0.8337,
+    "window": [
+      "2026-08-12",
+      "2026-11-09"
+    ],
+    "source": "DefiLlama /summary/dexs/near-intents"
+  },
+  "peers": {
+    "rows": [
+      {
+        "name": "Ethereum",
+        "symbol": "ETH",
+        "price_usd": 2086.21,
+        "circ_mcap_usd": 254949069055,
+        "fdv_usd": 254949069055,
+        "annual_fees_usd": 201951292.05555555,
+        "fee_window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "pf": 1262.4285116475762,
+        "fee_yield": 0.0007921240615002549,
+        "tvl_usd": 41465168921.04121,
+        "mcap_tvl": 6.148511526396505,
+        "price_as_of": "2026-11-10T12:45:49.000Z",
+        "circ_equals_total": true
+      },
+      {
+        "name": "Solana",
+        "symbol": "SOL",
+        "price_usd": 84.67,
+        "circ_mcap_usd": 50053208167,
+        "fdv_usd": 53961783928,
+        "annual_fees_usd": 275783540.7222222,
+        "fee_window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "pf": 181.49454472852372,
+        "fee_yield": 0.0055098074793145,
+        "tvl_usd": 5035887088.807376,
+        "mcap_tvl": 9.939303102773469,
+        "price_as_of": "2026-11-10T12:45:49.000Z",
+        "circ_equals_total": false
+      },
+      {
+        "name": "Sui",
+        "symbol": "SUI",
+        "price_usd": 0.829542,
+        "circ_mcap_usd": 3433509259,
+        "fdv_usd": 8295417099,
+        "annual_fees_usd": 1723688.1666666667,
+        "fee_window": [
+          "2026-08-11",
+          "2026-11-09"
+        ],
+        "pf": 1991.9549982406909,
+        "fee_yield": 0.0005020193733709885,
+        "tvl_usd": 430127207.57906383,
+        "mcap_tvl": 7.982543764960205,
+        "price_as_of": "2026-11-10T12:45:49.000Z",
+        "circ_equals_total": false
+      },
+      {
+        "name": "Aptos",
+        "symbol": "APT",
+        "price_usd": 0.577185,
+        "circ_mcap_usd": 510376427,
+        "fdv_usd": 699188934,
+        "annual_fees_usd": 1399791.2222222222,
+        "fee_window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "pf": 364.6089637494353,
+        "fee_yield": 0.002742664331991615,
+        "tvl_usd": 40039745.63534052,
+        "mcap_tvl": 12.746744988048162,
+        "price_as_of": "2026-11-10T12:45:49.000Z",
+        "circ_equals_total": false
+      },
+      {
+        "name": "NEAR",
+        "symbol": "NEAR",
+        "price_usd": 3.62,
+        "circ_mcap_usd": 4746588591,
+        "fdv_usd": 4746588917,
+        "annual_fees_usd": 1508824.8333333333,
+        "fee_window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "pf": 3145.884456656058,
+        "fee_yield": 0.00031787562886621644,
+        "tvl_usd": 169186372.71859464,
+        "mcap_tvl": 28.05538362652254,
+        "price_as_of": "2026-11-10T12:45:49.000Z",
+        "circ_equals_total": true
+      }
+    ],
+    "pf_range_ex_near": [
+      181,
+      814,
+      1992
+    ],
+    "pf_range_names": [
+      "Solana",
+      "Sui"
+    ],
+    "mt_range_ex_near": [
+      6.1,
+      9.0,
+      12.7
+    ],
+    "mt_range_names": [
+      "Ethereum",
+      "Aptos"
+    ],
+    "near_pf_vs_peer_median": 3.85,
+    "near_mt_vs_peer_median": 2.98,
+    "fetched_at": "2026-11-10T12:47:04.247Z",
+    "source": "CoinGecko /coins/markets (price, circulating mcap, FDV) + DefiLlama /summary/fees/{chain} (chain fees) + DefiLlama /v2/chains (TVL)"
   },
   "valuation": {
-    "current_price_usd": 3.64,
+    "current_price_usd": 3.62,
     "lenses_usd": {
       "fee_multiple": [
-        2.32,
-        6.95
+        0.21,
+        2.3
       ],
       "tvl_multiple": [
-        2.02,
-        5.4
+        0.83,
+        1.72
       ],
       "active_user": [
         2.26,
@@ -64,18 +202,21 @@
       ]
     },
     "blended_fair_range_usd": [
-      2.26,
-      6.79
+      0.52,
+      2.01
     ],
+    "price_at_peer_medians_usd": 1.08,
+    "fee_multiple_needed_for_peer_median_pf": 3.85,
+    "quarters_at_current_fee_growth": 6.6,
     "scenarios": {
       "bear": {
         "pf": [
-          1000,
-          3000
+          181,
+          814
         ],
         "mt": [
-          8,
-          20
+          6.1,
+          9.0
         ],
         "per_user": [
           20000,
@@ -84,12 +225,12 @@
       },
       "base": {
         "pf": [
-          2000,
-          6000
+          181,
+          1992
         ],
         "mt": [
-          15,
-          40
+          6.1,
+          12.7
         ],
         "per_user": [
           40000,
@@ -98,12 +239,12 @@
       },
       "bull": {
         "pf": [
-          4000,
-          10000
+          1992,
+          3135
         ],
         "mt": [
-          30,
-          70
+          12.7,
+          26.7
         ],
         "per_user": [
           80000,
@@ -112,15 +253,15 @@
       }
     },
     "basis": {
-      "annual_fees_usd": 1447749.3895170435,
-      "tvl_usd": 168613152,
-      "active_accounts": 70741.92222222222,
+      "annual_fees_usd": 1443287.3691185762,
+      "tvl_usd": 169186373,
+      "active_accounts": 70685.84444444445,
       "circ_supply": 1249836992.159308
     },
-    "method": "Median of 3 independent peer-multiple lenses (fees, TVL, active users). Assumption-driven, not a forecast. Edit the multiples at the top of model/thesis_model.py to re-run."
+    "method": "Band = average of the fee lens and the TVL lens. Their multiples come from live peer data (Ethereum, Solana, Sui, Aptos). The active-account lens is an unsourced assumption, shown but excluded from the band. Not a forecast."
   },
   "nvt_caveat": {
-    "current_nvt": 0.07,
+    "current_nvt": 0.066,
     "note": "NVT excluded from the fair-value range: NEARBlocks txn_volume_usd over-counts system/staking/refund transfers, so NVT is unreliable. Shown for transparency only."
   }
 }

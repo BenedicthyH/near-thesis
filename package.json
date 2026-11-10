@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "fetch": "node scripts/fetch_data.mjs",
-    "model": "python3 model/thesis_model.py",
+    "model": "python3 model/thesis_model.py && python3 model/write_thesis.py",
     "build": "npm run fetch && npm run model",
     "dev": "next dev",
     "site": "next build",

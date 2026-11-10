@@ -1,0 +1,111 @@
+{
+  "source": "CoinGecko /coins/markets (price, circulating mcap, FDV) + DefiLlama /summary/fees/{chain} (chain fees) + DefiLlama /v2/chains (TVL)",
+  "urls": [
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum,solana,sui,aptos,near",
+    "https://api.llama.fi/summary/fees/{chain}?dataType=dailyFees",
+    "https://api.llama.fi/v2/chains"
+  ],
+  "fetched_at": "2026-11-10T12:47:04.247Z",
+  "rows": [
+    {
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "price_usd": 2086.21,
+      "circ_mcap_usd": 254949069055,
+      "fdv_usd": 254949069055,
+      "circulating_supply": 122206811.20718135,
+      "total_supply": 122206811.20718135,
+      "price_as_of": "2026-11-10T12:45:49.000Z",
+      "tvl_usd": 41465168921.04121,
+      "fees": {
+        "last90_usd": 49796209,
+        "window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "trailing_1y_usd": 176476330,
+        "annualized_usd": 201951292.05555555
+      }
+    },
+    {
+      "name": "Solana",
+      "symbol": "SOL",
+      "price_usd": 84.67,
+      "circ_mcap_usd": 50053208167,
+      "fdv_usd": 53961783928,
+      "circulating_supply": 591149080.4748839,
+      "total_supply": 637310976.009585,
+      "price_as_of": "2026-11-10T12:45:49.000Z",
+      "tvl_usd": 5035887088.807376,
+      "fees": {
+        "last90_usd": 68001421,
+        "window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "trailing_1y_usd": 231806837,
+        "annualized_usd": 275783540.7222222
+      }
+    },
+    {
+      "name": "Sui",
+      "symbol": "SUI",
+      "price_usd": 0.829542,
+      "circ_mcap_usd": 3433509259,
+      "fdv_usd": 8295417099,
+      "circulating_supply": 4139043544.1303763,
+      "total_supply": 10000000000,
+      "price_as_of": "2026-11-10T12:45:49.000Z",
+      "tvl_usd": 430127207.57906383,
+      "fees": {
+        "last90_usd": 425019,
+        "window": [
+          "2026-08-11",
+          "2026-11-09"
+        ],
+        "trailing_1y_usd": 2594168,
+        "annualized_usd": 1723688.1666666667
+      }
+    },
+    {
+      "name": "Aptos",
+      "symbol": "APT",
+      "price_usd": 0.577185,
+      "circ_mcap_usd": 510376427,
+      "fdv_usd": 699188934,
+      "circulating_supply": 884250716.333662,
+      "total_supply": 1211377098.482906,
+      "price_as_of": "2026-11-10T12:45:49.000Z",
+      "tvl_usd": 40039745.63534052,
+      "fees": {
+        "last90_usd": 345154,
+        "window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "trailing_1y_usd": 1221387,
+        "annualized_usd": 1399791.2222222222
+      }
+    },
+    {
+      "name": "NEAR",
+      "symbol": "NEAR",
+      "price_usd": 3.62,
+      "circ_mcap_usd": 4746588591,
+      "fdv_usd": 4746588917,
+      "circulating_supply": 1311318636,
+      "total_supply": 1311318726,
+      "price_as_of": "2026-11-10T12:45:49.000Z",
+      "tvl_usd": 169186372.71859464,
+      "fees": {
+        "last90_usd": 372039,
+        "window": [
+          "2026-08-12",
+          "2026-11-09"
+        ],
+        "trailing_1y_usd": 1170387,
+        "annualized_usd": 1508824.8333333333
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "source": "NEARBlocks /v1/charts",
   "url": "https://api.nearblocks.io/v1/charts",
-  "fetched_at": "2026-11-09T19:43:25.032Z",
+  "fetched_at": "2026-11-10T12:47:04.247Z",
   "rows": [
     {
       "date": "2021-01-01",
@@ -27795,6 +27795,19 @@
       "near_price": 3.73202929,
       "market_cap": 4893020398.861515,
       "total_supply": 1311190871.4361143,
+      "circulating_supply": 1249836992.159308
+    },
+    {
+      "date": "2026-11-09",
+      "txns": 895302,
+      "active_accounts": 77752,
+      "new_accounts": 11970,
+      "active_contracts": 145602,
+      "gas_fee_near": 1020.7162485334869,
+      "txn_volume_usd": 91831142.12068428,
+      "near_price": 3.58070299,
+      "market_cap": 4694985121.055181,
+      "total_supply": 1311293172.4180355,
       "circulating_supply": 1249836992.159308
     }
   ]
