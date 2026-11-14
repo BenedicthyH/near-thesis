@@ -21,6 +21,18 @@ price to reach the peer-median price to fees.
 Snapshot: 2026-11-10. `npm run build` regenerates every number, including
 [THESIS.md](THESIS.md), which is written from the model output.
 
+## Try it
+1. Open https://out-sage-gamma.vercel.app. The first screen states the thesis
+   and the key reading: fees paid per active account, up 79.2% QoQ.
+2. Scroll to the valuation section and click Bear, Base or Bull. The
+   fair-value band and the verdict update to that scenario's peer multiples.
+3. Drag the P/F or Mcap/TVL slider. The scenario switches to Custom and the
+   band recomputes. Click Reset to Base to go back.
+4. Check any figure against its source, printed under each chart.
+5. Run `npm install && npm run build` locally. It re-fetches every source,
+   re-runs the model and rewrites `data/*.json`, `model/model_output.json`
+   and `THESIS.md` with current numbers.
+
 ## What the dashboard shows
 - The key insight, fees per active account, with the fee base next to it for
   scale, then what changed, what it costs and what would prove it wrong.
@@ -92,6 +104,13 @@ app/                     Next.js + Recharts dashboard (static export)
 data/                    latest fetched snapshot
 shots/                   screenshots
 ```
+
+## Built with
+- Next.js 14, React 18 and Recharts 2 for the dashboard (static export).
+- Node 18 `fetch` for the data layer, no extra packages.
+- Python 3 standard library for the model.
+- Free public APIs listed under Data sources.
+- Hosted on Vercel.
 
 ## Design
 The dashboard's visual style (paper, black ink, one oxblood accent, hairlines, running heads, numbered figures) is inspired by the [Parallel, Finance](https://www.framer.com/marketplace/templates/parallel-finance/) Framer template. The code is original and uses the free Google Fonts Newsreader and Instrument Sans. No template code or assets are used.
