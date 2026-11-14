@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {
   ResponsiveContainer, AreaChart, Area, LineChart, Line, BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,
 } from 'recharts';
 
 // Palette after the Parallel (Framer) research-quarterly look: paper, black ink, one oxblood accent.
@@ -98,6 +98,17 @@ export default function Dashboard({ data }) {
   const fpaRows = (() => { const f = weekly(charts.rows, 'gas_fee_near', '2023-01-01'), a = weekly(charts.rows, 'active_accounts', '2023-01-01');
     return f.map((x, i) => ({ date: x.date, v: a[i] && a[i].v ? x.v / a[i].v : null })).filter((x) => x.v != null); })();
   const P = m.per_account;
+  // Price vs active accounts: 7-day trailing averages of the same daily NEARBlocks rows the model uses.
+  const pvaBase = charts.rows.filter((r) => r.active_accounts != null && r.near_price != null);
+  const pvaAll = pvaBase.map((r, i) => {
+    const w = pvaBase.slice(Math.max(0, i - 6), i + 1);
+    return { date: r.date, px: w.reduce((a, x) => a + x.near_price, 0) / w.length, aa: w.reduce((a, x) => a + x.active_accounts, 0) / w.length };
+  });
+  const pvaRows = pvaAll.slice(-365);
+  const W = m.adoption.window;
+  const aaRows = charts.rows.filter((r) => r.active_accounts != null);
+  const aaPrevAvg = aaRows.slice(-180, -90).reduce((a, x) => a + x.active_accounts, 0) / 90;
+  const md = (d) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
 
   const [lo, hi] = m.valuation.blended_fair_range_usd;
   const V = m.valuation, B = V.basis;
@@ -206,6 +217,28 @@ export default function Dashboard({ data }) {
           <Chart id="fpa" title="Fees paid per active account (NEAR / day)" now={P.fee_near_per_active_account_day.toFixed(4) + ' Ⓝ · ' + pct(P.fee_per_account_growth_qoq) + ' QoQ'} color={GREEN}
             take={<>Derived: weekly gas fees divided by weekly active accounts. This is the core of the thesis.<span className="cap">Bullish if real demand. Could also be bots leaving or a few heavy apps. Watch whether total accounts stabilize.</span></>}
             src="api.nearblocks.io/v1/charts → gas_fee ÷ active_accounts · weekly avg, since 2023" rows={fpaRows} fmt={(v) => v.toFixed(3)} />
+          <div className="card full">
+            <h3>NEAR price vs active accounts</h3>
+            <div className="metnow num">Avg price {pct(m.adoption.avg_price_growth_qoq)} · avg active accounts {pct(m.adoption.active_accounts_growth_qoq)} · last 90d vs prior 90d</div>
+            <div className="pva-key"><span><i className="sw ink" />Active accounts per day (left axis)</span><span><i className="sw ox" />NEAR price, USD (right axis)</span><span><i className="sw band" />The two 90-day windows the model compares</span></div>
+            <ResponsiveContainer width="100%" height={240}>
+              <LineChart data={pvaRows} margin={{ top: 18, right: 0, left: 0, bottom: 0 }}>
+                <CartesianGrid stroke={GRID} vertical={false} />
+                <ReferenceArea yAxisId="aa" x1={W.prev90[0]} x2={W.prev90[1]} fill="#e4dfd3" fillOpacity={0.6} stroke="none" ifOverflow="extendDomain"
+                  label={{ value: 'Prior 90d', position: 'insideTop', dy: -16, fill: AX, fontSize: 10.5, fontFamily: FONT }} />
+                <ReferenceArea yAxisId="aa" x1={W.last90[0]} x2={W.last90[1]} fill="#efe2dc" fillOpacity={0.8} stroke="none" ifOverflow="extendDomain"
+                  label={{ value: 'Last 90d', position: 'insideTop', dy: -16, fill: GREEN, fontSize: 10.5, fontFamily: FONT }} />
+                <XAxis dataKey="date" ticks={pvaRows.filter((r) => r.date.endsWith('-01')).map((r) => r.date)} tickFormatter={xTick} {...axis} minTickGap={24} />
+                <YAxis yAxisId="aa" tickFormatter={compact} {...axis} width={42} />
+                <YAxis yAxisId="px" orientation="right" tickFormatter={(v) => '$' + v.toFixed(2)} {...axis} width={44} domain={[0, 'auto']} />
+                <Tooltip {...tt} labelFormatter={(d) => d}
+                  formatter={(v, k) => (k === 'px' ? ['$' + Number(v).toFixed(2), 'NEAR price, 7d avg'] : [nf(v), 'Active accounts, 7d avg'])} />
+                <Line yAxisId="aa" isAnimationActive={false} type="monotone" dataKey="aa" stroke={INK} strokeWidth={1.6} dot={false} />
+                <Line yAxisId="px" isAnimationActive={false} type="monotone" dataKey="px" stroke={GREEN} strokeWidth={1.6} dot={false} />
+              </LineChart>
+            </ResponsiveContainer>
+            <div className="foot"><div className="take">Daily NEAR price and daily active accounts on one timeline, each shown as a 7-day trailing average over the last 365 days. The shaded bands are the two 90-day windows behind every QoQ figure on this page.<span className="cap">They diverge. Comparing the last 90 days ({md(W.last90[0])} to {md(W.last90[1])}) with the prior 90 ({md(W.prev90[0])} to {md(W.prev90[1])}), average NEAR price rose {pct(m.adoption.avg_price_growth_qoq)} (${d2(m.adoption.avg_price_prev90d)} to ${d2(m.adoption.avg_price_90d)}) while average daily active accounts fell {pct(m.adoption.active_accounts_growth_qoq).replace('-', '')} ({compact(aaPrevAvg)} to {compact(m.adoption.active_accounts_90d_avg)}). Price moved up as usage moved down, which is part of why NEAR trades {baseWhere}.</span></div><div className="src">api.nearblocks.io/v1/charts → near_price, active_accounts · 7-day trailing avg, last 365 days</div></div>
+          </div>
         </div>
 
         <div className="sec" id="network"><div className="runhead"><span>§ 03 · Network</span><span className="rh-r">NEAR Investment Thesis · p. 3</span></div><h2>Capital &amp; network <em>security</em></h2></div>

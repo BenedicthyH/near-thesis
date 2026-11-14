@@ -39,7 +39,8 @@ Snapshot: 2026-11-10. `npm run build` regenerates every number, including
 - Other readings of the same data. Accounts are not users, and the numbers
   also fit bots or farmers leaving, or fees concentrating in a few apps.
 - Network usage: transactions, active and new accounts, gas fees in NEAR and
-  in USD, and fees per active account (derived).
+  in USD, fees per active account (derived), and NEAR price against active
+  accounts, with the two 90-day windows marked.
 - Capital and security: DeFi TVL, total and circulating supply, staking ratio
   and validator count, NEAR Intents listed assets per chain (breadth, not
   volume) and NEAR Intents routed volume (DefiLlama).

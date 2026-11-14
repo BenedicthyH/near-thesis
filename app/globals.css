@@ -123,6 +123,11 @@ ol.read b{color:var(--ink);font-weight:500}
 .take .cap{display:block;margin-top:6px;font-family:var(--sans);font-style:normal;font-size:13px;color:var(--ink);font-weight:500;padding-left:10px;border-left:2px solid var(--ox)}
 .card .src{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--muted);margin-top:8px;overflow-x:auto;white-space:nowrap}
 .full{grid-column:1 / -1}
+.pva-key{display:flex;flex-wrap:wrap;gap:6px 22px;margin:-6px 0 10px;font-size:12px;color:var(--ink3)}
+.pva-key span{display:inline-flex;align-items:center;gap:7px}
+.pva-key .sw{display:inline-block;width:16px;height:2px;background:var(--ink)}
+.pva-key .sw.ox{background:var(--ox)}
+.pva-key .sw.band{height:10px;width:12px;background:var(--ox-tint);border:1px solid var(--rule)}
 .recharts-legend-item-text{color:var(--ink3) !important}
 
 /* tables, in the "index" style */
