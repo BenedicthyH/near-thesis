@@ -5,8 +5,10 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
-const GREEN = '#00ec97', SLATE = '#475569', SLATE2 = '#94a3b8', TEAL = '#17d9d4';
-const GRID = '#eef0f2', AX = '#9aa3ad', INK = '#0b0d0e';
+// Palette after the Parallel (Framer) research-quarterly look: paper, black ink, one oxblood accent.
+const GREEN = '#7a1f1f', SLATE = '#141414', SLATE2 = '#a39e91', TEAL = '#35332f';
+const GRID = '#e4dfd3', AX = '#8c877b', INK = '#141414', DOWN = '#9a5b13';
+const FONT = "'Instrument Sans', -apple-system, 'Segoe UI', sans-serif";
 
 const nf = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d });
 const usd = (n) => '$' + nf(n);
@@ -31,8 +33,8 @@ function weekly(rows, key, start = '2021-07-01') {
   return out;
 }
 
-const axis = { stroke: AX, fontSize: 10.5, tickLine: false, axisLine: { stroke: GRID } };
-const tt = { contentStyle: { background: '#fff', border: '1px solid #e5e7eb', borderRadius: 4, color: INK, fontSize: 12, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }, cursor: { stroke: '#cbd5e1', strokeWidth: 1 } };
+const axis = { stroke: AX, fontSize: 10.5, fontFamily: FONT, tickLine: false, axisLine: { stroke: '#cfc9bb' } };
+const tt = { contentStyle: { background: '#fbf9f4', border: '1px solid #141414', borderRadius: 2, color: INK, fontSize: 12, fontFamily: FONT, boxShadow: 'none' }, cursor: { stroke: '#a39e91', strokeWidth: 1, strokeDasharray: '2 3' } };
 const xTick = (d) => (typeof d === 'string' ? d.slice(2, 7) : d);
 
 function Chart({ full, id, title, now, take, src, rows, color = SLATE, area = true, fmt = compact }) {
@@ -45,7 +47,7 @@ function Chart({ full, id, title, now, take, src, rows, color = SLATE, area = tr
         {area ? (
           <AreaChart data={rows} margin={{ top: 4, right: 6, left: 0, bottom: 0 }}>
             <defs><linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity={0.14} /><stop offset="100%" stopColor={color} stopOpacity={0} />
+              <stop offset="0%" stopColor={color} stopOpacity={0.10} /><stop offset="100%" stopColor={color} stopOpacity={0} />
             </linearGradient></defs>
             <CartesianGrid stroke={GRID} vertical={false} />
             <XAxis dataKey="date" tickFormatter={xTick} {...axis} minTickGap={44} />
@@ -134,20 +136,20 @@ export default function Dashboard({ data }) {
           <span className="prod">Investment Thesis</span>
         </div>
         <span className="tag">Research</span>
+        <nav className="nav-in" aria-label="Sections">
+          <a className="active" href="#overview">Overview</a>
+          <a href="#usage">Usage</a>
+          <a href="#network">Network</a>
+          <a href="#valuation">Valuation</a>
+        </nav>
         <span className="spacer" />
         <span className="meta num">Data as of {m.generated_at} · keyless, re-runnable</span>
       </div></div>
 
-      <div className="nav"><div className="nav-in">
-        <a className="active" href="#overview">Overview</a>
-        <a href="#usage">Usage</a>
-        <a href="#network">Network</a>
-        <a href="#valuation">Valuation</a>
-      </div></div>
-
       <div className="wrap">
         <div className="hero" id="overview">
-          <h1>Fewer NEAR accounts are paying more for blockspace.</h1>
+          <div className="runhead"><span>§ 01 · Overview</span><span className="rh-r">NEAR Investment Thesis · p. 1</span></div>
+          <h1>Fewer NEAR accounts are paying <em>more</em> for blockspace.</h1>
           <p className="sub">A live read of NEAR usage, fees, capital and security, plus a valuation model you can re-run or adjust here. Every figure comes from free public APIs via one command. Nothing is typed in by hand.</p>
           <div className="insight">
             <div className="ins-k">
@@ -184,12 +186,12 @@ export default function Dashboard({ data }) {
           <div className="kpi"><div className="l">Intents volume, 90d</div><div className="v num">{usdB(IV.volume_usd_90d)}</div><div className={'d num ' + (IV.volume_growth_qoq >= 0 ? 'up' : 'down')}>{pct(IV.volume_growth_qoq)} QoQ · {it.asset_count} listed assets</div></div>
         </div>
 
-        <div className="sec" id="usage"><h2>Network usage</h2></div>
+        <div className="sec" id="usage"><div className="runhead"><span>§ 02 · Usage</span><span className="rh-r">NEAR Investment Thesis · p. 2</span></div><h2>Network <em>usage</em></h2></div>
         <div className="grid">
           <Chart id="tx" title="Transactions per day" now={compact(m.adoption.txns_90d_avg) + ' / day · 90d avg'} color={SLATE}
             take={<>Multi-year transaction base, not one incentive spike.<span className="cap">Neutral. Txns {pct(m.adoption.txns_growth_qoq)} QoQ, a smaller drop than accounts. Usage per account is up.</span></>}
             src="api.nearblocks.io/v1/charts → txns · weekly avg" rows={tx} />
-          <Chart id="aa" title="Active accounts per day" now={compact(m.adoption.active_accounts_90d_avg) + ' / day · ' + pct(m.adoption.active_accounts_growth_qoq) + ' QoQ'} color={aaDown ? '#b45309' : SLATE}
+          <Chart id="aa" title="Active accounts per day" now={compact(m.adoption.active_accounts_90d_avg) + ' / day · ' + pct(m.adoption.active_accounts_growth_qoq) + ' QoQ'} color={aaDown ? DOWN : SLATE}
             take={<>Down vs the prior quarter. This is the main headwind.<span className="cap">Bearish on its own. Read it next to fees.</span></>}
             src="api.nearblocks.io/v1/charts → active_accounts · weekly avg" rows={aa} />
           <Chart id="na" title="New accounts per day" now={compact(na[na.length-1].v) + ' latest wk'} color={SLATE}
@@ -206,7 +208,7 @@ export default function Dashboard({ data }) {
             src="api.nearblocks.io/v1/charts → gas_fee ÷ active_accounts · weekly avg, since 2023" rows={fpaRows} fmt={(v) => v.toFixed(3)} />
         </div>
 
-        <div className="sec" id="network"><h2>Capital &amp; network security</h2></div>
+        <div className="sec" id="network"><div className="runhead"><span>§ 03 · Network</span><span className="rh-r">NEAR Investment Thesis · p. 3</span></div><h2>Capital &amp; network <em>security</em></h2></div>
         <div className="grid">
           <Chart id="tvl" title="DeFi TVL (USD)" now={usd(m.defi.tvl_usd) + ' · Mcap/TVL ' + m.defi.mcap_to_tvl + '×'} color={SLATE}
             take={<>Capital that has stayed through several market cycles.<span className="cap">Bearish on valuation. Mcap/TVL is {m.defi.mcap_to_tvl}× on circulating mcap vs {PR.mt_range_ex_near[1]}× for the peer median.</span></>}
@@ -263,7 +265,7 @@ export default function Dashboard({ data }) {
             src="api.llama.fi/summary/dexs/near-intents → dailyVolume · weekly avg, since 2025" rows={ivRows} fmt={(v) => '$' + compact(v)} />
         </div>
 
-        <div className="sec" id="valuation"><h2>Valuation</h2></div>
+        <div className="sec" id="valuation"><div className="runhead"><span>§ 04 · Valuation</span><span className="rh-r">NEAR Investment Thesis · p. 4</span></div><h2><em>Valuation</em></h2></div>
         <div className="grid">
           <div className="card full">
             <h3>Peer multiples (live)</h3>

@@ -93,5 +93,8 @@ data/                    latest fetched snapshot
 shots/                   screenshots
 ```
 
+## Design
+The dashboard's visual style (paper, black ink, one oxblood accent, hairlines, running heads, numbered figures) is inspired by the [Parallel, Finance](https://www.framer.com/marketplace/templates/parallel-finance/) Framer template. The code is original and uses the free Google Fonts Newsreader and Instrument Sans; no template code or assets are used.
+
 ## License
 MIT. Not financial advice.
