@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Data-fetch layer for the NEAR Investment Thesis dashboard.
-// Pulls ONLY from free, keyless public endpoints. Never invents numbers.
-// One command rebuilds every dataset: `node scripts/fetch_data.mjs`
+// Fetches the data behind the NEAR Investment Thesis dashboard.
+// Uses free, keyless public endpoints only. No hand-entered numbers.
+// Run: node scripts/fetch_data.mjs
 import { writeFile, mkdir } from 'node:fs/promises';
 
 const OUT = new URL('../data/', import.meta.url);

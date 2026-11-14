@@ -91,26 +91,26 @@ multiples NEAR would be $1.08. At today's price, fees must grow about
 3.85x for NEAR's P/F to reach the peer median. At the latest +22.6% QoQ rate in NEAR terms that is about 6.6 quarters. That is arithmetic, not a forecast.
 
 ## Other data
-- **Staking.** 582.1M NEAR, 46.6% of circulating supply, across
-  351 validators.
-- **NEAR Intents volume.** $12.02B routed in the last 90 days, +83.4% QoQ
-  (DefiLlama `near-intents` adapter). This is swap volume, not fees to NEAR.
-- **NEAR Intents listed assets.** 216 assets across 39 chains listed by the 1Click API.
-  This counts breadth, not usage.
-- **Capital.** DeFi TVL is $169.19M.
-- **Accounts and transactions.** 70.7K active accounts a day
-  (-31.6% QoQ) and 739K transactions a day (-4.6% QoQ).
+Staking: 582.1M NEAR, 46.6% of circulating supply, across
+351 validators.
+
+NEAR Intents routed $12.02B in the last 90 days, +83.4% QoQ
+(DefiLlama `near-intents` adapter). This is swap volume, not fees to NEAR. The 1Click API lists
+216 assets across 39 chains, which measures breadth, not usage.
+
+DeFi TVL is $169.19M. Active accounts average 70.7K a day
+(-31.6% QoQ) and transactions 739K a day (-4.6% QoQ).
 
 ## What would change our mind
-1. **Fees roll over.** QoQ fee growth in NEAR terms turns negative.
-2. **The premium does not close.** NEAR's P/F stays near 3.85x the peer median
+1. Fees roll over: QoQ fee growth in NEAR terms turns negative.
+2. The premium does not close: NEAR's P/F stays near 3.85x the peer median
    for two quarters while price holds.
-3. **Fees are concentrated.** Contract-level data shows most fees come from one
+3. Fees are concentrated: contract-level data shows most fees come from one
    or two apps or from bot loops.
-4. **Staking falls.** Staked ratio drops below 40%, or the validator set shrinks
+4. Staking falls: staked ratio drops below 40%, or the validator set shrinks
    materially.
-5. **Intents stalls.** Routed volume falls for two quarters.
-6. **Capital leaves.** TVL falls more than 30% while price holds.
+5. Intents stalls: routed volume falls for two quarters.
+6. Capital leaves: DeFi TVL falls more than 30% while price holds.
 
 ## Reproduce
 ```bash

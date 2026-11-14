@@ -335,7 +335,7 @@ export default function Dashboard({ data }) {
               </tbody>
             </table></div>
             <div className="assume">
-              <div className="assume-h">Drag or type a multiple. Band, implied price and verdict update instantly. Fee and TVL presets come from peer data; anything you type is your assumption.</div>
+              <div className="assume-h">Drag or type a multiple. The band, implied price and verdict update as you go. Fee and TVL presets come from peer data; anything you type is your assumption.</div>
               {[
                 ['pf', 'Price-to-fees multiple', 100, 20000, 100, (v) => nf(v) + '×'],
                 ['mt', 'Market-cap / TVL multiple', 1, 150, 1, (v) => v + '×'],
@@ -374,7 +374,7 @@ export default function Dashboard({ data }) {
         </div>
 
         <div className="pageft">
-          Model generated {m.generated_at}. QoQ = last 90 days ({m.adoption.window.last90[0]} to {m.adoption.window.last90[1]}) vs the 90 days before. Sources, fetched {charts.fetched_at.slice(0, 16).replace('T', ' ')} UTC: NEARBlocks, DefiLlama (TVL, chain fees, NEAR Intents volume), CoinGecko (peer prices and mcap), NEAR RPC, NEAR Intents 1Click. All free and keyless. Rebuild with <code>npm run build</code>. NEAR HACKATHON, Investment Thesis track. Not financial advice.
+          Model generated {m.generated_at}. QoQ = last 90 days ({m.adoption.window.last90[0]} to {m.adoption.window.last90[1]}) vs the 90 days before. Sources, fetched {charts.fetched_at.slice(0, 16).replace('T', ' ')} UTC: NEARBlocks, DefiLlama (TVL, chain fees, NEAR Intents volume), CoinGecko (peer prices and mcap), NEAR RPC, NEAR Intents 1Click. All free and keyless. Rebuild with <code>npm run build</code>. NEAR Hackathon, Investment Thesis track. Not financial advice.
         </div>
       </div>
     </>

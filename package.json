@@ -2,7 +2,7 @@
   "name": "near-thesis",
   "version": "0.1.0",
   "private": true,
-  "description": "Evidence-first NEAR investment thesis: live onchain analytics dashboard + re-runnable model",
+  "description": "NEAR investment thesis: onchain dashboard and a valuation model you can re-run",
   "type": "module",
   "scripts": {
     "fetch": "node scripts/fetch_data.mjs",

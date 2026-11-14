@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Writes THESIS.md from model/model_output.json so the write-up can never drift from the data."""
+"""Writes THESIS.md from model/model_output.json so the write-up matches the data."""
 import json, os
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 m = json.load(open(os.path.join(ROOT, "model", "model_output.json")))
@@ -123,26 +123,26 @@ multiples NEAR would be {px(V['price_at_peer_medians_usd'])}. At today's price, 
 {V['fee_multiple_needed_for_peer_median_pf']}x for NEAR's P/F to reach the peer median.{qtxt}
 
 ## Other data
-- **Staking.** {m['security']['staked_near']/1e6:.1f}M NEAR, {pp(m['security']['staked_ratio'])} of circulating supply, across
-  {m['security']['num_validators']} validators.
-- **NEAR Intents volume.** {usdB(IV['volume_usd_90d'])} routed in the last 90 days, {pct(IV['volume_growth_qoq'])} QoQ
-  (DefiLlama `near-intents` adapter). This is swap volume, not fees to NEAR.
-- **NEAR Intents listed assets.** {json.load(open(os.path.join(ROOT,'data','intents_assets.json')))['data']['asset_count']} assets across {json.load(open(os.path.join(ROOT,'data','intents_assets.json')))['data']['chains_supported']} chains listed by the 1Click API.
-  This counts breadth, not usage.
-- **Capital.** DeFi TVL is {usdM(m['defi']['tvl_usd'])}.
-- **Accounts and transactions.** {A['active_accounts_90d_avg']/1e3:.1f}K active accounts a day
-  ({pct(A['active_accounts_growth_qoq'])} QoQ) and {A['txns_90d_avg']/1e3:.0f}K transactions a day ({pct(A['txns_growth_qoq'])} QoQ).
+Staking: {m['security']['staked_near']/1e6:.1f}M NEAR, {pp(m['security']['staked_ratio'])} of circulating supply, across
+{m['security']['num_validators']} validators.
+
+NEAR Intents routed {usdB(IV['volume_usd_90d'])} in the last 90 days, {pct(IV['volume_growth_qoq'])} QoQ
+(DefiLlama `near-intents` adapter). This is swap volume, not fees to NEAR. The 1Click API lists
+{json.load(open(os.path.join(ROOT,'data','intents_assets.json')))['data']['asset_count']} assets across {json.load(open(os.path.join(ROOT,'data','intents_assets.json')))['data']['chains_supported']} chains, which measures breadth, not usage.
+
+DeFi TVL is {usdM(m['defi']['tvl_usd'])}. Active accounts average {A['active_accounts_90d_avg']/1e3:.1f}K a day
+({pct(A['active_accounts_growth_qoq'])} QoQ) and transactions {A['txns_90d_avg']/1e3:.0f}K a day ({pct(A['txns_growth_qoq'])} QoQ).
 
 ## What would change our mind
-1. **Fees roll over.** QoQ fee growth in NEAR terms turns negative.
-2. **The premium does not close.** NEAR's P/F stays near {PR['near_pf_vs_peer_median']}x the peer median
+1. Fees roll over: QoQ fee growth in NEAR terms turns negative.
+2. The premium does not close: NEAR's P/F stays near {PR['near_pf_vs_peer_median']}x the peer median
    for two quarters while price holds.
-3. **Fees are concentrated.** Contract-level data shows most fees come from one
+3. Fees are concentrated: contract-level data shows most fees come from one
    or two apps or from bot loops.
-4. **Staking falls.** Staked ratio drops below 40%, or the validator set shrinks
+4. Staking falls: staked ratio drops below 40%, or the validator set shrinks
    materially.
-5. **Intents stalls.** Routed volume falls for two quarters.
-6. **Capital leaves.** TVL falls more than 30% while price holds.
+5. Intents stalls: routed volume falls for two quarters.
+6. Capital leaves: DeFi TVL falls more than 30% while price holds.
 
 ## Reproduce
 ```bash

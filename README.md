@@ -3,11 +3,11 @@
 A live onchain dashboard and a re-runnable valuation model for NEAR.
 Built for the NEAR Hackathon, Investment Thesis track.
 
-**Live:** https://out-sage-gamma.vercel.app
+Live: https://out-sage-gamma.vercel.app
 
 ![Dashboard](shots/desktop-hero.png)
 
-## Thesis in one line
+## Thesis
 Fewer NEAR accounts are paying more for blockspace. Over the last 90 days,
 active accounts fell 31.6% against the prior 90 days while gas fees paid rose
 22.6% in NEAR terms (135.2% in USD, mostly because NEAR's price rose), so fees
@@ -22,22 +22,22 @@ Snapshot: 2026-11-10. `npm run build` regenerates every number, including
 [THESIS.md](THESIS.md), which is written from the model output.
 
 ## What the dashboard shows
-- **Key insight and read.** Fees per active account, the fee base for scale,
-  then what changed, what it costs and what would prove it wrong.
-- **Other readings.** Accounts are not users. The same data fits bots or
-  farmers leaving, or fees concentrating in a few apps.
-- **Network usage.** Transactions, active and new accounts, gas fees in NEAR
-  and in USD, and fees per active account (derived).
-- **Capital and security.** DeFi TVL, total and circulating supply, staking
-  ratio and validator count, NEAR Intents listed assets per chain (breadth,
-  not volume) and NEAR Intents routed volume (DefiLlama).
-- **Valuation.** A live peer table (price, circulating mcap, annualized fees,
-  P/F, fee yield, TVL, Mcap/TVL) with sources, then a fair-value band from the
-  fee and TVL lenses at peer multiples. Bear, Base and Bull presets plus
+- The key insight, fees per active account, with the fee base next to it for
+  scale, then what changed, what it costs and what would prove it wrong.
+- Other readings of the same data. Accounts are not users, and the numbers
+  also fit bots or farmers leaving, or fees concentrating in a few apps.
+- Network usage: transactions, active and new accounts, gas fees in NEAR and
+  in USD, and fees per active account (derived).
+- Capital and security: DeFi TVL, total and circulating supply, staking ratio
+  and validator count, NEAR Intents listed assets per chain (breadth, not
+  volume) and NEAR Intents routed volume (DefiLlama).
+- Valuation: a live peer table (price, circulating mcap, annualized fees, P/F,
+  fee yield, TVL, Mcap/TVL) with sources, then a fair-value band from the fee
+  and TVL lenses at peer multiples, with Bear, Base and Bull presets and
   sliders. The value-per-active-account lens is shown but labelled unsourced
   and kept out of the band, since no like-for-like public peer series exists.
-- **Falsifiers.** The conditions that would change the view, with current
-  values next to each.
+- Falsifiers: the conditions that would change the view, with current values
+  next to each.
 
 All ratios use circulating market cap (price x circulating supply). FDV is
 shown separately. NEARBlocks' `market_cap` field equals FDV, so it is not used
@@ -94,7 +94,7 @@ shots/                   screenshots
 ```
 
 ## Design
-The dashboard's visual style (paper, black ink, one oxblood accent, hairlines, running heads, numbered figures) is inspired by the [Parallel, Finance](https://www.framer.com/marketplace/templates/parallel-finance/) Framer template. The code is original and uses the free Google Fonts Newsreader and Instrument Sans; no template code or assets are used.
+The dashboard's visual style (paper, black ink, one oxblood accent, hairlines, running heads, numbered figures) is inspired by the [Parallel, Finance](https://www.framer.com/marketplace/templates/parallel-finance/) Framer template. The code is original and uses the free Google Fonts Newsreader and Instrument Sans. No template code or assets are used.
 
 ## License
 MIT. Not financial advice.
